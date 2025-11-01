@@ -232,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal('Contact Us', '<p>For inquiries, please reach out via email: <a href="mailto:info@teatrade.co.uk">info@teatrade.co.uk</a>.</p>');
         });
     }
-    // Note: The privacy-link is a direct link in the corporate footer, so no JS is needed.
 
     // --- Jobs Page Logic ---
     if (document.body.classList.contains('jobs-page')) {
@@ -254,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Corporate Page "Coming Soon" Modal Links ---
-    // *** THIS IS THE LOGIC THAT WAS MISSING ***
+    // *** THIS IS THE FIX FOR YOUR MODALS ***
     const comingSoonLinks = document.querySelectorAll('.modal-link-soon');
     comingSoonLinks.forEach(link => {
         link.addEventListener('click', (e) => {
