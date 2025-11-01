@@ -1,0 +1,1297 @@
+/* --- Global Styles --- */
+body, html { margin: 0; font-family: 'Roboto', sans-serif; background-color: #ffffff; color: #202124; }
+a { text-decoration: none; color: inherit; }
+* { box-sizing: border-box; }
+
+/* --- Homepage & Corporate Page Styles --- */
+/* FIX: Use 100svh for better mobile viewport height */
+body.home, body.corporate-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh; /* Use 100svh instead of 100vh for mobile */
+}
+.container { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+.user-actions { display: flex; gap: 20px; }
+.user-actions a { color: #4a4a4a; }
+.user-actions a:hover { opacity: 0.7; }
+.user-actions svg { width: 24px; height: 24px; }
+
+/* Homepage/Corporate Specific Header Wrapper (for user actions placement) */
+.home-header-wrapper, .corporate-header-wrapper { width: 100%; display: flex; justify-content: flex-end; padding: 16px 24px; }
+
+.logo h1 { font-size: 92px; font-weight: 400; color: #4a4a4a; margin: 0; margin-bottom: 10px; letter-spacing: -1px; }
+.logo span { font-weight: 500; color: #2a2a2a; }
+a.logo-link { text-decoration: none; }
+.sub-logo { font-size: 13px; font-weight: 500; color: #5f6368; text-transform: uppercase; letter-spacing: 9.5px; margin: 0 0 40px 9.5px; }
+.search-area { width: 100%; max-width: 584px; margin-bottom: 10px; }
+.search-bar { width: 100%; height: 46px; padding: 0 20px; font-size: 16px; border-radius: 24px; border: 1px solid #dfe1e5; }
+.search-bar:hover, .search-bar:focus { border-color: #c5c7ca; box-shadow: 0 1px 6px rgba(32,33,36,.28); outline: none; }
+.main-nav ul { list-style: none; padding: 0; margin: 28px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.main-nav a { background-color: #f8f9fa; color: #3c4043; font-size: 14px; padding: 8px 16px; border-radius: 4px; }
+.main-nav a:hover { box-shadow: 0 1px 1px rgba(0,0,0,.1); background-color: #f1f3f4; }
+
+/* === FIX: THIS IS THE RESTORED HOMEPAGE FOOTER RULE === */
+footer {
+    font-size: 12px;
+    color: #70757a;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+/* === END OF FIX === */
+
+
+/* --- Reusable Header Styles --- */
+.site-header { background-color: #fff; border-bottom: 1px solid #ebebeb; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+.header-top-bar { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1280px; margin: 0 auto; }
+.header-logo h1 { font-size: 28px; font-weight: 400; margin: 0; }
+.header-logo span { font-weight: 500; }
+.header-search-wrapper { flex-grow: 1; display: flex; justify-content: center; padding: 0 40px; }
+.header-search-bar { width: 100%; max-width: 720px; height: 44px; padding: 0 16px; font-size: 16px; border-radius: 24px; background-color: #ffffff; border: 1px solid #dfe1e5; }
+.header-search-bar:focus { background-color: #fff; box-shadow: 0 1px 6px rgba(32,33,36,.1); outline: none; }
+
+/* Mobile Menu Toggle (Hidden on desktop) */
+.mobile-menu-toggle { display: none; cursor: pointer; padding: 8px; background: none; border: none; }
+.mobile-menu-toggle svg { width: 24px; height: 24px; color: #5f6368; }
+
+/* === THIS IS YOUR GOOGLE-STYLE UNDERLINE NAV === */
+.secondary-nav { max-width: 1280px; margin: 0 auto; }
+.secondary-nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 25px; height: 48px; align-items: center; }
+.secondary-nav a { font-size: 14px; color: #5f6368; padding-bottom: 8px; font-weight: 500; }
+.secondary-nav a.active { color: #1a73e8; border-bottom: 3px solid #1a73e8; }
+.secondary-nav a:not(.active):hover { color: #3c4043; }
+/* === END NAV STYLE === */
+
+/* Style for the new Sign Out icon button in header */
+#sign-out-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 0; /* Helps align the icon */
+    color: #4a4a4a; /* Matches other user-action icons */
+}
+#sign-out-btn:hover {
+    opacity: 0.7;
+}
+#sign-out-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* --- Page Styles (General) --- */
+.page-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.page-title { font-size: 28px; font-weight: 400; margin: 10px 0 20px 0; color: #3c4043; }
+
+/* --- News Page Styles --- */
+.news-list { list-style: none; padding: 0; }
+.news-item { display: flex; align-items: center; padding: 16px 0; border-bottom: 1px solid #ebebeb; }
+.news-item:first-child { padding-top: 0; }
+.news-item .image-link { margin-left: 16px; flex-shrink: 0; order: 2; }
+.news-item .article-image { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; background-color: #f0f0f0; }
+.news-item .text-content { flex: 1; order: 1; min-width: 0; }
+.news-item .source { font-size: 12px; font-weight: 400; color: #5f6368; margin-bottom: 4px; }
+.news-item .main-link h3 { font-size: 16px; font-weight: 500; color: #202124; margin: 0 0 4px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.news-item .main-link:hover h3 { text-decoration: underline; color: #1a0dab; }
+.news-item .snippet { font-size: 13px; color: #4d5156; margin: 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* --- Jobs & Products Page Styles --- */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 16px;
+    align-items: center;
+    position: sticky;
+    top: 112px; 
+    z-index: 99;
+    background-color: #fff;
+    padding: 12px 24px;
+    border-bottom: 1px solid #ebebeb;
+}
+.filter-group { display: flex; flex-direction: column; gap: 4px; }
+.filter-label { font-size: 12px; color: #5f6368; font-weight: 500; padding-left: 12px; }
+.filter-dropdown {
+    height: 38px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 999px;
+    border: 1px solid #dadce0;
+    background-color: #f8f9fa;
+    color: #3c4043;
+    cursor: pointer;
+    min-width: 150px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f6368' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 36px;
+}
+.filter-dropdown:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+/* === REMOVED: Unused Job Filter Button Styles === */
+
+.jobs-container { display: flex; max-width: 1280px; width: 100%; margin: 0 auto; padding: 16px 24px; gap: 24px; align-items: flex-start; }
+.job-list-pane { flex: 2; max-width: 450px; border: 1px solid #dadce0; border-radius: 8px; }
+.job-card { 
+    padding: 16px; 
+    border-bottom: 1px solid #ebebeb; 
+    cursor: pointer; 
+    position: relative; /* <-- ADDED THIS FOR SAVE BUTTON */
+}
+.job-card:last-child { border-bottom: none; }
+.job-card:hover { background-color: #f8f9fa; }
+.job-card.active { background-color: #e8f0fe; }
+.job-details-pane { flex: 3; position: sticky; top: 177px; height: calc(100vh - 193px); overflow-y: auto; border: 1px solid #dadce0; border-radius: 8px; }
+.job-details-content { padding: 24px; }
+.apply-button { background-color: #1a73e8; color: #fff; border: none; border-radius: 999px; padding: 12px 24px; font-size: 15px; font-weight: 500; cursor: pointer; transition: background-color 0.2s; }
+.apply-button:hover { background-color: #185abc; }
+.divider { border: 0; border-top: 1px solid #ebebeb; margin: 24px 0; }
+.job-details-content h4 { font-size: 16px; font-weight: 500; margin: 16px 0 8px 0; }
+.job-details-content ul { padding-left: 20px; margin: 0; line-height: 1.6; }
+
+.product-grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; max-width: 1280px; margin: 0 auto; padding: 24px; }
+.product-card { background-color: #fff; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; text-decoration: none; color: inherit; }
+.product-card:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.product-card:hover .product-name { text-decoration: underline; color: #1a0dab; }
+.product-card-image-wrapper { width: 100%; padding-top: 100%; position: relative; background-color: #f8f9fa; }
+.product-card-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+.product-card-info { flex-grow: 1; padding: 16px; border-top: 1px solid #ebebeb; display: flex; flex-direction: column; }
+.product-name { font-size: 16px; font-weight: 500; color: #202124; margin: 0 0 4px 0; flex-grow: 1; }
+.product-brand { font-size: 14px; color: #5f6368; margin: 0 0 8px 0; }
+.product-price { font-size: 16px; font-weight: 700; color: #1a73e8; margin: 0 0 8px 0; }
+
+.product-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 8px;
+    min-height: 24px;
+}
+.product-reviews > div:first-child {
+     display: flex;
+     align-items: center;
+     gap: 6px; 
+     flex-grow: 1; 
+}
+.star-rating { font-size: 16px; position: relative; display: inline-block; }
+.star-rating::before { content: '★★★★★'; color: #dadce0; }
+.star-rating-filled { position: absolute; top: 0; left: 0; white-space: nowrap; overflow: hidden; color: #fbbc04; }
+.star-rating-filled::before { content: '★★★★★'; }
+.review-count {
+    font-size: 12px;
+    color: #5f6368;
+    margin-left: 0; 
+}
+
+.quick-view-btn {
+    background: none;
+    border: none;
+    padding: 2px;
+    margin-left: 8px; 
+    cursor: pointer;
+    color: #5f6368;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; 
+}
+.quick-view-btn:hover { background-color: #f1f3f4; color: #1a73e8; }
+.quick-view-btn:focus { outline: none; box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2); }
+
+.product-badge { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; font-size: 11px; font-weight: 500; color: #fff; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.product-badge.top-rated { background-color: #fbbc04; color: #ffffff; }
+.product-badge.popular { background-color: #1a73e8; }
+
+/* --- Corporate Pages Styles --- */
+.data-library-page .page-container, .dashboard-page .page-container, .market-reports-page .page-container, .visuals-page .page-container { background-color: #fff; border: 1px solid #dadce0; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dashboard-header .page-title { margin-bottom: 0; }
+.slicer-controls { display: flex; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; }
+.slicer-button { padding: 8px 16px; background-color: #fff; border: none; border-left: 1px solid #dadce0; font-size: 14px; font-weight: 500; color: #5f6368; cursor: pointer; transition: background-color 0.2s; }
+.slicer-button:first-child { border-left: none; }
+.slicer-button:hover { background-color: #f8f9fa; }
+.slicer-button.active { background-color: #e8f0fe; color: #1967d2; }
+.page-search-wrapper { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #ebebeb; }
+.page-search-bar { width: 100%; max-width: 400px; height: 44px; padding: 0 16px; font-size: 15px; border-radius: 8px; border: 1px solid #dadce0; }
+.filter-controls-wrapper { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #ebebeb; }
+.dataset-item { border-bottom: 1px solid #ebebeb; transition: background-color 0.2s; }
+.dataset-item:hover { background-color: #f8f9fa; }
+.dataset-item a { display: block; padding: 16px; }
+.dataset-title { font-size: 18px; font-weight: 500; color: #1a0dab; margin: 0 0 8px 0; }
+.dataset-period { color: #5f6368; font-weight: 400; }
+.dataset-description { font-size: 14px; color: #4d5156; margin: 0 0 12px 0; line-height: 1.5; }
+.dataset-meta { font-size: 12px; color: #5f6368; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.view-switcher { background-color: #fff; padding: 12px 0; border-bottom: 1px solid #ebebeb; margin-top: 16px; display: flex; overflow-x: auto; white-space: nowrap;}
+.view-chip { background-color: #f1f3f4; border: 1px solid #f1f3f4; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; color: #3c4043; margin-right: 8px; cursor: pointer; }
+.view-chip.active { background-color: #e8f0fe; color: #1967d2; border-color: #d2e3fc; }
+.chart-container { position: relative; height: 60vh; background-color: #fff; padding: 16px; border-radius: 8px; margin-top: 16px;}
+#map-container { height: 70vh; width: 100%; border-radius: 8px; margin-top: 16px; background-color: #f8f9fa; border: 1px solid #dadce0;}
+.data-table { width: 100%; border-collapse: collapse; background-color: #fff; }
+.data-table-container { overflow-x: auto; margin-top: 16px; border: 1px solid #dadce0; border-radius: 8px;}
+.data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #dadce0; }
+.data-table thead { background-color: #f8f9fa; }
+.data-table th { font-size: 14px; font-weight: 500; color: #5f6368; cursor: pointer; user-select: none; position: relative; }
+.data-table th:hover { background-color: #f1f3f4; }
+.data-table th.sort-asc, .data-table th.sort-desc { color: #202124; }
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tfoot tr td { border-bottom: none; }
+.data-table tbody tr:hover { background-color: #f8f9fa; }
+.data-table td { font-size: 14px; }
+.sort-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.1em; font-weight: bold; color: #1a73e8; }
+.report-section { margin-bottom: 40px; }
+.report-section h3 { border-bottom: 2px solid #1a73e8; padding-bottom: 8px; margin-bottom: 16px; font-size: 20px; font-weight: 500; }
+.report-section h4 { font-size: 16px; font-weight: 500; margin-top: 20px; margin-bottom: 10px; color: #3c4043; }
+.stat-cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background-color: #f8f9fa; border: 1px solid #dadce0; border-radius: 8px; padding: 16px; text-align: center; }
+.stat-value { font-size: 24px; font-weight: 500; color: #202124; display: block; margin-bottom: 4px; }
+.stat-label { font-size: 14px; color: #5f6368; }
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.commentary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.commentary-card { border: 1px solid #dadce0; border-radius: 8px; padding: 16px; background-color: #f8f9fa; }
+.commentary-card h4 { margin-top: 0; color: #1a73e8; font-size: 18px; }
+.data-table.stats-table th { text-align: center; padding: 8px 10px; }
+.data-table.stats-table td { text-align: right; padding: 8px 10px; }
+.data-table.stats-table td:first-child { text-align: left; font-weight: 500; }
+.header-main { border-bottom: 2px solid #dadce0; }
+.header-sub { font-weight: normal; font-size: 0.85em; }
+.diff-positive { color: #1e8e3e; font-weight: 500; }
+.diff-negative { color: #d93025; font-weight: 500; }
+.distribution-container { display: flex; flex-wrap: wrap; gap: 24px; }
+.distribution-block { flex: 1; min-width: 300px; padding: 16px; border: 1px solid #dadce0; border-radius: 8px; background-color: #fff; }
+.international-summary-item { margin-bottom: 24px; padding: 16px; border: 1px solid #dadce0; border-radius: 8px; }
+
+/* --- Visuals Page Styles --- */
+.visuals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+.visual-card { background-color: #fff; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s ease-in-out; display: block; }
+.visual-card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+.visual-card-image-wrapper { width: 100%; aspect-ratio: 16/9; position: relative; background-color: #f8f9fa; }
+.visual-card-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.visual-card-info { padding: 16px; }
+.visual-card-title { font-size: 18px; font-weight: 500; color: #202124; margin: 0 0 8px 0; line-height: 1.4; }
+.visual-card-meta { font-size: 12px; color: #5f6368; }
+
+/* --- Footer & Modal Styles --- */
+.site-footer-minimal {
+    text-align: center;
+    padding: 24px;
+    background: #ffffff;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.site-footer-minimal a { color: #555; text-decoration: none; margin: 0 12px; cursor: pointer; }
+.site-footer-minimal a:hover { color: #1a73e8; text-decoration: underline; }
+
+/* Modal Overlay */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s ease-in-out; }
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-content { background: #fff; padding: 30px; border-radius: 8px; max-width: 600px; width: 90%; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-height: 80vh; overflow-y: auto; }
+.modal-close { position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight: bold; color: #aaa; background: none; border: none; cursor: pointer; line-height: 1; }
+.modal-close:hover { color: #333; }
+#modal-body-content h2 { margin-top: 0; font-family: 'Roboto', sans-serif; color: #333; font-weight: 700; }
+#modal-body-content p { font-family: 'Roboto', sans-serif; line-height: 1.6; color: #555; margin-bottom: 16px; }
+#modal-body-content a { color: #1a73e8; text-decoration: none; }
+#modal-body-content a:hover { text-decoration: underline; }
+#modal-body-content strong { font-weight: 500; color: #333; }
+
+/* Quick View Modal styles */
+.quick-view-modal { display: flex; gap: 24px; }
+.quick-view-image { width: 200px; height: 200px; object-fit: contain; border: 1px solid #ebebeb; border-radius: 8px; }
+.quick-view-info { flex: 1; }
+.quick-view-title { font-size: 24px; font-weight: 500; margin: 0 0 8px 0; }
+.quick-view-brand { font-size: 16px; color: #5f6368; margin: 0 0 16px 0; }
+.quick-view-price { font-size: 20px; font-weight: 700; color: #1a73e8; margin: 0 0 16px 0; }
+.quick-view-description { font-size: 14px; line-height: 1.6; color: #5f6368; margin-top: 16px; border-top: 1px solid #ebebeb; padding-top: 16px; }
+
+.quick-view-button {
+    display: inline-block;
+    background-color: #1a73e8;
+    color: #ffffff !important; 
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 500;
+    margin-top: 24px;
+    transition: background-color 0.2s;
+}
+.quick-view-button:hover { background-color: #185abc; }
+
+
+/* --- Responsive Styles --- */
+
+/* Medium devices (Tablets, 900px and down) */
+@media (max-width: 900px) {
+    .jobs-container { flex-direction: column; }
+    .job-details-pane { position: static; height: auto; margin-top: 16px; }
+    .job-list-pane { max-width: none; margin-bottom: 16px; }
+    
+    .filter-bar {
+        top: 64px; 
+    }
+
+    .mobile-menu-toggle { display: block; }
+    .header-search-wrapper { display: none; }
+    
+    .user-actions {
+        display: none;
+    }
+    
+    .secondary-nav {
+        position: absolute;
+        top: 64px; 
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        border-bottom: 1px solid #ebebeb;
+        padding: 0 24px;
+        display: none; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .secondary-nav.active {
+        display: block;
+    }
+    
+    .secondary-nav ul {
+        flex-direction: column;
+        height: auto;
+        align-items: flex-start;
+        gap: 0;
+    }
+    .secondary-nav li { width: 100%; }
+    .secondary-nav a {
+        display: block;
+        padding: 12px 0;
+        border-bottom: 1px solid #f1f3f4;
+        width: 100%;
+    }
+    .secondary-nav li:last-child a { border-bottom: none; }
+    .secondary-nav a.active { border-bottom: 1px solid #f1f3f4; color: #1a73e8; }
+    
+    .comparison-grid { grid-template-columns: 1fr; }
+}
+
+/* Small devices (Phones, 600px and down) */
+@media (max-width: 600px) {
+    .site-header { padding: 0 16px; }
+    .page-container { padding: 16px; }
+    .home-header-wrapper, .corporate-header-wrapper { padding: 16px; }
+
+    .logo h1 { font-size: 72px; }
+    .sub-logo { letter-spacing: 5px; margin: 0 0 30px 5px; }
+    
+     .news-item .image-link { margin-left: 16px; }
+     .news-item .main-link h3 { font-size: 16px; }
+
+    .dashboard-header { flex-direction: column; align-items: stretch; }
+    .slicer-controls { width: 100%; }
+    .slicer-button { flex: 1; text-align: center; }
+    .page-search-bar { max-width: 100%; }
+    
+    .jobs-container, .product-grid-container, .filter-bar { padding-left: 16px; padding-right: 16px; }
+
+    .product-grid-container {
+        grid-template-columns: 1fr 1fr; 
+        gap: 16px; 
+    }
+
+    .data-library-page .page-container, .dashboard-page .page-container, .market-reports-page .page-container, .visuals-page .page-container {
+        margin-top: 16px;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+    }
+    .visuals-grid { grid-template-columns: 1fr; }
+    
+    .quick-view-modal { flex-direction: column; }
+    .quick-view-image { width: 100%; height: auto; }
+    .quick-view-title { font-size: 20px; }
+    
+    .quick-view-button {
+        display: block;           
+        width: fit-content;       
+        margin-left: auto;        
+        margin-right: auto;
+    }
+}
+/* ===================================
+   Recipe Page Styles (SAFE VERSION)
+   =================================== */
+
+.recipe-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 24px;
+    max-width: 1280px; 
+    margin: 0 auto;
+}
+
+.recipe-grid-container .recipe-card {
+    background-color: #fff;
+    border: 1px solid #dadce0; 
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative; /* Add this for save button */
+}
+
+.recipe-grid-container .recipe-card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.recipe-grid-container .recipe-card a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.recipe-grid-container .recipe-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    background-color: #f8f9fa; 
+}
+
+.recipe-grid-container .recipe-card .card-content {
+    padding: 16px 20px 20px;
+}
+
+.recipe-grid-container .recipe-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #202124; 
+}
+
+.recipe-grid-container .recipe-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5f6368; 
+    line-height: 1.5;
+}
+/* ===================================
+   Recipe Detail Page Styles
+   =================================== */
+
+.recipe-page-container {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+.recipe-header {
+    text-align: center;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+}
+
+.recipe-header h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 0 0 16px;
+}
+
+.recipe-intro {
+    font-size: 1.1rem;
+    color: #5f6368;
+    max-width: 700px;
+    margin: 0 auto 24px;
+}
+
+.recipe-meta-box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    background-color: #f8f9fa;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.meta-item {
+    text-align: center;
+    padding: 0 16px;
+}
+.meta-item strong {
+    font-size: 0.8rem;
+    color: #5f6368;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+}
+.meta-item span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* ===================================
+   Recipe Detail Page Layout (NEW)
+   =================================== */
+.recipe-image-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ebebeb;
+    position: relative; /* Add this for save button */
+}
+.recipe-image-wrapper img {
+    width: 100%;
+    display: block;
+    background-color: #f8f9fa;
+}
+
+.recipe-top-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 24px;
+    margin-bottom: 32px; 
+}
+
+@media (min-width: 768px) {
+    .recipe-top-grid {
+        grid-template-columns: 3fr 2fr;
+        gap: 32px;
+        align-items: flex-start; 
+    }
+}
+
+.recipe-ingredients h2,
+.recipe-instructions h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 0 16px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 8px;
+}
+
+.recipe-ingredients ul,
+.recipe-instructions ol {
+    padding-left: 20px;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+.recipe-ingredients li,
+.recipe-instructions li {
+    margin-bottom: 12px;
+}
+
+/* ===================================
+   Authentication Page Styles
+   =================================== */
+
+.auth-page {
+    background-color: #ffffff; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.auth-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth-form-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 32px 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.auth-form-box h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #202124;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #3c4043;
+}
+
+.form-group input {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    background-color: #f8f9fa;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+.auth-button {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: #1a73e8;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 8px;
+}
+
+.auth-button:hover {
+    background-color: #185abc;
+}
+
+.auth-switch {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #5f6368;
+    margin-top: 24px;
+    margin-bottom: 0;
+}
+
+.auth-switch a {
+    color: #1a73e8;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.form-error-message {
+    font-size: 0.9rem;
+    color: #d93025; 
+    margin: 0 0 12px 0;
+    display: none; 
+}
+
+.form-success-message {
+    font-size: 0.9rem;
+    color: #1e8e3e; 
+    background-color: #e6f4ea;
+    border: 1px solid #b7e1c1;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+/* ===================================
+   Dashboard Page Styles (UPDATED)
+   =================================== */
+
+.dashboard-container {
+    max-width: 1100px; 
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+}
+
+.dashboard-welcome {
+    font-size: 1rem;
+    color: #5f6368;
+    margin-bottom: 24px;
+}
+
+/* Tab Navigation (NEW PILL STYLE) */
+.dashboard-tabs {
+    display: flex;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.dashboard-tab-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #5f6368;
+    background-color: #fff;
+    border: none;
+    border-left: 1px solid #dadce0;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    flex-grow: 1; 
+}
+.dashboard-tab-button:first-child {
+    border-left: none; 
+}
+
+.dashboard-tab-button:hover {
+    background-color: #f8f9fa;
+}
+
+.dashboard-tab-button.active {
+    background-color: #e8f0fe; 
+    color: #1967d2; 
+}
+
+.dashboard-tab-button svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5px;
+}
+
+/* Tab Panels */
+.dashboard-panel {
+    display: none; 
+}
+
+.dashboard-panel.active {
+    display: block; 
+}
+
+.empty-message {
+    font-size: 1rem;
+    color: #5f6368;
+    text-align: center;
+    padding: 48px 24px;
+    background-color: #f8f9fa;
+    border: 1px dashed #dadce0;
+    border-radius: 8px;
+}
+
+.dashboard-panel .product-grid-container,
+.dashboard-panel .recipe-grid-container {
+    padding: 0;
+    max-width: none;
+}
+
+/* ===================================
+   Save (Bookmark) Button Styles
+   =================================== */
+
+.save-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 3; 
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #dadce0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #5f6368;
+    transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+    background-color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.save-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.save-btn.saved {
+    background-color: #1a73e8;
+    color: #fff;
+    border-color: #1a73e8;
+}
+
+.dashboard-panel .save-btn {
+    background-color: #1a73e8;
+    color: #fff;
+    border-color: #1a73e8;
+}
+
+/* ===================================
+   Privacy Page Styles (NEW)
+   =================================== */
+
+.privacy-page-container {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 0 24px;
+    background-color: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 24px 40px;
+}
+
+.privacy-page-container h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 0 0 16px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 16px;
+}
+
+.privacy-page-container h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 8px;
+}
+
+.privacy-page-container h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 24px 0 12px;
+}
+
+.privacy-page-container p,
+.privacy-page-container li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #3c4043;
+    margin-bottom: 16px;
+}
+
+.privacy-page-container ul {
+    padding-left: 20px;
+}
+
+.privacy-page-container a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+.privacy-page-container a:hover {
+    text-decoration: underline;
+}
+
+.privacy-page-container .important-notice {
+    background-color: #fef7e0;
+    border: 1px solid #fceec4;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 24px 0;
+}
+.privacy-page-container .important-notice strong {
+    color: #b06000;
+}
+
+@media (max-width: 600px) {
+    .privacy-page-container {
+        margin-top: 16px;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        padding: 24px 16px;
+    }
+    .privacy-page-container h1 {
+        font-size: 2rem;
+    }
+    .privacy-page-container h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* ===================================
+   Learning Hub Page Styles
+   =================================== */
+
+.learning-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.article-card {
+    background-color: #fff;
+    border: 1px solid #dadce0; 
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.article-card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.article-card a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.article-card-image-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.article-card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.article-card .card-content {
+    padding: 16px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 140px;
+}
+
+.article-card .card-content h3 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #202124; 
+    flex-grow: 1;
+}
+
+.article-card .card-content p {
+    margin: 0 0 16px;
+    font-size: 0.9rem;
+    color: #5f6368; 
+    line-height: 1.5;
+}
+
+.article-card .article-meta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #1a73e8;
+    text-transform: uppercase;
+    margin-top: auto;
+}
+
+/* ===================================
+   Article Detail Page Styles
+   =================================== */
+
+.article-page-container {
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+.article-header {
+    text-align: center;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+}
+
+.article-breadcrumb {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1a73e8;
+    margin-bottom: 16px;
+    text-decoration: none;
+}
+.article-breadcrumb:hover {
+    text-decoration: underline;
+}
+
+.article-header h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 0 0 16px;
+}
+
+.article-intro {
+    font-size: 1.2rem;
+    color: #5f6368;
+    max-width: 750px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.article-image-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ebebeb;
+    margin-bottom: 32px;
+}
+.article-image-wrapper img {
+    width: 100%;
+    display: block;
+    background-color: #f8f9fa;
+}
+
+.article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #3c4043;
+}
+
+.article-content h2 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.article-content p {
+    margin-bottom: 24px;
+}
+
+.article-content ul,
+.article-content ol {
+    margin-bottom: 24px;
+    padding-left: 24px;
+}
+
+.article-content li {
+    margin-bottom: 12px;
+}
+
+/* ===================================
+   Article Page Enhancements
+   =================================== */
+
+/* Add more space between sections */
+.article-content h2 {
+    margin-top: 56px; 
+    padding-top: 24px; 
+    border-top: 1px solid #ebebeb; 
+    border-bottom: none; 
+}
+
+/* Less space for the very first heading */
+.article-content h2:first-of-type {
+    margin-top: 32px; 
+    padding-top: 0;
+    border-top: none;
+}
+
+/* The new callout box style */
+.article-callout {
+    background-color: #f8f9fa;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 24px 0 32px;
+    display: grid;
+    grid-template-columns: 24px 1fr; /* Icon column + text column */
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.article-callout svg {
+    width: 24px;
+    height: 24px;
+    color: #1a73e8; /* Use the brand's blue */
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.article-callout-content {
+    flex: 1;
+}
+
+.article-callout h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #1a73e8;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.article-callout p,
+.article-callout li {
+    font-size: 1rem; /* Slightly smaller than main text */
+    color: #3c4043;
+    line-height: 1.7;
+}
+
+.article-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.article-callout ul {
+    padding-left: 20px;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+/* ===================================
+   Article Page Layout Tweaks
+   =================================== */
+
+/* 1. Left-align the breadcrumb link */
+.article-header {
+    text-align: left; /* Was 'center' */
+}
+
+/* 2. Re-center the main H1 title */
+.article-header h1 {
+    text-align: center;
+}
+
+/* 3. Create the new side-by-side grid */
+.article-top-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50/50 split */
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 32px;
+}
+
+/* 4. Tweak the intro text for the grid */
+.article-intro {
+    font-size: 1.1rem; /* A bit smaller to fit */
+    margin: 0; /* Remove old margins */
+    max-width: none; /* Remove max-width */
+}
+
+/* 5. Tweak the image for the grid */
+.article-image-wrapper {
+    margin-bottom: 0; /* Remove old margin */
+}
+
+/* 6. On mobile, stack them back to one column */
+@media (max-width: 768px) {
+    .article-top-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .article-header h1 {
+        font-size: 2rem; /* Make title a bit smaller on mobile */
+    }
+
+    .article-intro {
+        font-size: 1rem;
+        text-align: center; /* Center intro text on mobile */
+    }
+}
+
+/* ===================================
+   Article Share Buttons
+   =================================== */
+
+/* This new container holds the 'back' link and 'share' buttons */
+.article-header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+    /* This makes sure they wrap nicely on small phones */
+    flex-wrap: wrap;
+    gap: 16px; 
+}
+
+/* This is the container for the new buttons */
+.article-share-buttons {
+    display: flex;
+    gap: 8px;
+    position: relative; /* For the tooltip */
+}
+
+.article-share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border: 1px solid #dadce0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    color: #3c4043;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.article-share-btn:hover {
+    background-color: #f1f3f4;
+    border-color: #c5c7ca;
+    transform: scale(1.1);
+}
+.article-share-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: #3c4043;
+}
+
+/* Tooltip for 'Copy Link' */
+.copy-tooltip-text {
+    visibility: hidden;
+    width: 100px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%; /* Position above the button */
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.copy-tooltip-text.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Instagram Share Button Color */
+.article-share-btn.instagram:hover {
+    background-color: #f0f0f0; /* A neutral hover */
+    /* You can also add branded colors, but this is cleaner */
+}
