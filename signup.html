@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6152394247686137"
+     crossorigin="anonymous"></script>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="c372e1d7-3c7e-4d0a-9cee-23e8ef283836" type="text/javascript" async></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7CQLXXEKCE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7CQLXXEKCE');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - TeaTrade</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+    <header class="site-header">
+        <div class="header-top-bar">
+            <a href="index.html" class="header-logo"><h1>Tea<span>Trade</span></h1></a>
+        </div>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-form-box">
+            <h2>Create Account</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" minlength="6" required>
+                </div>
+                <p class="form-error-message" id="signup-error"></p>
+                <button type="submit" class="auth-button">Create Account</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
+        </div>
+    </main>
+
+    <footer class="site-footer-minimal">
+        <a href="javascript:void(0);" id="about-link">About Us</a>
+        <a href="javascript:void(0);" id="contact-link">Contact</a>
+        <a href="javascript:void(0);" id="privacy-link">Privacy & Disclosure</a>
+    </footer>
+
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            <div id="modal-body-content"></div>
+        </div>
+    </div>
+    
+    <!-- === START: CORRECT FIREBASE SCRIPT BLOCK === -->
+
+    <!-- Load Firebase Services (without defer, so they run first) -->
+    <!-- FIX: Added '-compat' to load the v8-compatible libraries -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <!-- Initialize Firebase with YOUR config -->
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCEOGY7MXF2H_R6GaeQQubnVE5rlsxiXsg",
+        authDomain: "teatrade-c6c67.firebaseapp.com",
+        projectId: "teatrade-c6c67",
+        storageBucket: "teatrade-c6c67.firebasestorage.app",
+        messagingSenderId: "965043250471",
+        appId: "1:965043250471:web:49877995f3ec0c9a437502",
+        measurementId: "G-9XRWGY128T"
+      };
+
+      // Initialize Firebase
+      // This will now work because the -compat scripts create the global 'firebase' object
+      const app = firebase.initializeApp(firebaseConfig);
+      
+      // Initialize the services we need
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
+    
+    <!-- Load YOUR main script file LAST (with defer) -->
+    <script src="script.js" defer></script>
+    <!-- === END: CORRECT FIREBASE SCRIPT BLOCK === -->
+
+</body>
+</html>
