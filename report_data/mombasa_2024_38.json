@@ -1,0 +1,3276 @@
+{
+  "metadata": {
+    "sale_number": "2024-38",
+    "sale_date": "2024-09-24",
+    "location": "Mombasa",
+    "year": 2024,
+    "sale_num_only": 38,
+    "generated_at": "2025-10-19T21:29:38.911236"
+  },
+  "kpis": {
+    "TOTAL_VOLUME": "3,505",
+    "AVG_PRICE": "$3.47",
+    "PRICE_CHANGE": "N/A (First Sale)",
+    "PRICE_CHANGE_CLASS": "neutral",
+    "PRICE_CHANGE_NUMERIC": 0,
+    "SELL_THROUGH_RATE": "0.00%",
+    "SELL_THROUGH_RATE_RAW": 0,
+    "REALIZATION_RATE": "N/A",
+    "SNAPSHOT": "Prices generally steady (N/A (First Sale)). Low demand; significant withdrawals."
+  },
+  "insights": "First sale recorded; no historical data for comparison.",
+  "charts": {
+    "interactive_distribution": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "data": {
+        "name": "source_sales_week"
+      },
+      "mark": {
+        "type": "bar",
+        "color": "#4285F4"
+      },
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "price_brush",
+            "value": 1.0
+          },
+          "value": 0.7
+        },
+        "tooltip": [
+          {
+            "bin": true,
+            "field": "price",
+            "type": "quantitative"
+          },
+          {
+            "aggregate": "count",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "bin": {
+            "maxbins": 50
+          },
+          "field": "price",
+          "title": "Price (USD/kg)",
+          "type": "quantitative"
+        },
+        "y": {
+          "aggregate": "count",
+          "title": "Number of Lots",
+          "type": "quantitative"
+        }
+      },
+      "height": 220,
+      "params": [
+        {
+          "name": "price_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ],
+            "fields": [
+              "price"
+            ]
+          }
+        }
+      ],
+      "title": "Price Distribution (Click and drag here to filter other charts)",
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "interactive_grade": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "layer": [
+        {
+          "data": {
+            "name": "source_sales_week"
+          },
+          "mark": {
+            "type": "bar",
+            "color": "#4285F4"
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "grade",
+                "type": "nominal"
+              },
+              {
+                "aggregate": "mean",
+                "field": "price",
+                "format": "$.2f",
+                "title": "Current Avg Price (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "sum",
+                "field": "total_weight_kgs",
+                "format": ",.0f",
+                "title": "Current Volume (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "max",
+                "field": "prev_avg_price",
+                "format": "$.2f",
+                "title": "Previous Avg Price (Overall)",
+                "type": "quantitative"
+              }
+            ],
+            "x": {
+              "field": "grade",
+              "sort": {
+                "field": "price",
+                "op": "mean",
+                "order": "descending"
+              },
+              "title": "Grade",
+              "type": "nominal"
+            },
+            "y": {
+              "aggregate": "mean",
+              "field": "price",
+              "title": "Average Price (USD/kg)",
+              "type": "quantitative"
+            }
+          },
+          "name": "view_1",
+          "transform": [
+            {
+              "lookup": "grade",
+              "default": null,
+              "from": {
+                "data": {
+                  "name": "source_prev_grade_metrics"
+                },
+                "key": "grade",
+                "fields": [
+                  "prev_avg_price"
+                ]
+              }
+            },
+            {
+              "filter": {
+                "param": "price_brush"
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "name": "source_prev_grade_metrics"
+          },
+          "mark": {
+            "type": "tick",
+            "color": "#000000",
+            "size": 15,
+            "thickness": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "grade",
+              "type": "nominal"
+            },
+            "y": {
+              "field": "prev_avg_price",
+              "type": "quantitative"
+            }
+          }
+        }
+      ],
+      "height": 320,
+      "params": [
+        {
+          "name": "price_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ],
+            "fields": [
+              "price"
+            ]
+          },
+          "views": [
+            "view_1"
+          ]
+        }
+      ],
+      "title": "Average Price by Grade (Black tick = Previous Week)",
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "interactive_broker": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "layer": [
+        {
+          "data": {
+            "name": "source_sales_week"
+          },
+          "mark": {
+            "type": "bar",
+            "color": "#4285F4"
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "broker",
+                "type": "nominal"
+              },
+              {
+                "aggregate": "sum",
+                "field": "value_usd",
+                "format": "$,.0f",
+                "title": "Current Total Value (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "mean",
+                "field": "price",
+                "format": "$.2f",
+                "title": "Current Avg Price (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "max",
+                "field": "prev_total_value",
+                "format": "$,.0f",
+                "title": "Previous Total Value (Overall)",
+                "type": "quantitative"
+              }
+            ],
+            "x": {
+              "field": "broker",
+              "sort": {
+                "field": "value_usd",
+                "op": "sum",
+                "order": "descending"
+              },
+              "title": "Broker",
+              "type": "nominal"
+            },
+            "y": {
+              "aggregate": "sum",
+              "field": "value_usd",
+              "title": "Total Value (USD)",
+              "type": "quantitative"
+            }
+          },
+          "name": "view_2",
+          "transform": [
+            {
+              "lookup": "broker",
+              "default": null,
+              "from": {
+                "data": {
+                  "name": "source_prev_broker_metrics"
+                },
+                "key": "broker",
+                "fields": [
+                  "prev_total_value"
+                ]
+              }
+            },
+            {
+              "filter": {
+                "param": "price_brush"
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "name": "source_prev_broker_metrics"
+          },
+          "mark": {
+            "type": "tick",
+            "color": "#000000",
+            "size": 15,
+            "thickness": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "broker",
+              "type": "nominal"
+            },
+            "y": {
+              "field": "prev_total_value",
+              "type": "quantitative"
+            }
+          }
+        }
+      ],
+      "height": 320,
+      "params": [
+        {
+          "name": "price_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ],
+            "fields": [
+              "price"
+            ]
+          },
+          "views": [
+            "view_2"
+          ]
+        }
+      ],
+      "title": "Total Value by Broker (Black tick = Previous Week)",
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "buyers_main": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "data": {
+        "name": "source_sales_week"
+      },
+      "mark": {
+        "type": "bar"
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "param": "buyer_select",
+            "value": "#4285F4"
+          },
+          "value": "#a6c8ff"
+        },
+        "tooltip": [
+          {
+            "field": "buyer",
+            "type": "nominal"
+          },
+          {
+            "field": "total_value",
+            "format": "$,.0f",
+            "title": "Value (USD)",
+            "type": "quantitative"
+          },
+          {
+            "field": "total_volume",
+            "format": ",.0f",
+            "title": "Volume (kg)",
+            "type": "quantitative"
+          },
+          {
+            "field": "avg_price",
+            "format": "$.2f",
+            "title": "Avg Price",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "dynamic_metric_sum",
+          "title": null,
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "buyer",
+          "sort": {
+            "field": "dynamic_metric_sum",
+            "order": "descending"
+          },
+          "title": "Buyer",
+          "type": "nominal"
+        }
+      },
+      "height": 400,
+      "params": [
+        {
+          "name": "buyer_select",
+          "select": {
+            "type": "point",
+            "fields": [
+              "buyer"
+            ],
+            "clear": false
+          }
+        },
+        {
+          "name": "metric_switch_param",
+          "bind": {
+            "input": "radio",
+            "options": [
+              "Value (USD)",
+              "Volume (kg)"
+            ],
+            "name": "Select Metric: "
+          },
+          "value": "Value (USD)"
+        }
+      ],
+      "title": "Top 15 Buyers (Click bar to see breakdown)",
+      "transform": [
+        {
+          "filter": "(datum.buyer !== 'N/A (Pending)')"
+        },
+        {
+          "calculate": "if((metric_switch_param === 'Value (USD)'),datum.value_usd,datum.total_weight_kgs)",
+          "as": "dynamic_metric"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "value_usd",
+              "as": "total_value"
+            },
+            {
+              "op": "sum",
+              "field": "total_weight_kgs",
+              "as": "total_volume"
+            },
+            {
+              "op": "sum",
+              "field": "dynamic_metric",
+              "as": "dynamic_metric_sum"
+            }
+          ],
+          "groupby": [
+            "buyer"
+          ]
+        },
+        {
+          "window": [
+            {
+              "op": "rank",
+              "field": "",
+              "as": "rank"
+            }
+          ],
+          "sort": [
+            {
+              "field": "dynamic_metric_sum",
+              "order": "descending"
+            }
+          ]
+        },
+        {
+          "filter": "(datum.rank <= 15)"
+        },
+        {
+          "calculate": "(datum.total_value / datum.total_volume)",
+          "as": "avg_price"
+        }
+      ],
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "buyers_breakdown": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "data": {
+        "name": "source_sales_week"
+      },
+      "mark": {
+        "type": "bar",
+        "color": "#4285F4"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "buyer",
+            "type": "nominal"
+          },
+          {
+            "field": "grade",
+            "type": "nominal"
+          },
+          {
+            "aggregate": "sum",
+            "field": "value_usd",
+            "format": "$,.0f",
+            "title": "Value (USD)",
+            "type": "quantitative"
+          },
+          {
+            "aggregate": "sum",
+            "field": "total_weight_kgs",
+            "format": ",.0f",
+            "title": "Volume (kg)",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "aggregate": "sum",
+          "field": "dynamic_metric",
+          "title": null,
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "grade",
+          "sort": "-x",
+          "title": "Grade",
+          "type": "nominal"
+        }
+      },
+      "height": 400,
+      "params": [
+        {
+          "name": "buyer_select",
+          "select": {
+            "type": "point",
+            "fields": [
+              "buyer"
+            ],
+            "clear": false
+          }
+        },
+        {
+          "name": "metric_switch_param",
+          "bind": {
+            "input": "radio",
+            "options": [
+              "Value (USD)",
+              "Volume (kg)"
+            ],
+            "name": "Select Metric: "
+          },
+          "value": "Value (USD)"
+        }
+      ],
+      "title": "Grade Breakdown",
+      "transform": [
+        {
+          "calculate": "if((metric_switch_param === 'Value (USD)'),datum.value_usd,datum.total_weight_kgs)",
+          "as": "dynamic_metric"
+        },
+        {
+          "filter": {
+            "param": "buyer_select"
+          }
+        }
+      ],
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "candlestick": {}
+  },
+  "tables": {
+    "sell_through": [
+      {
+        "Metric": "Lots Offered",
+        "Value": "0"
+      },
+      {
+        "Metric": "Lots Sold",
+        "Value": "95"
+      },
+      {
+        "Metric": "Rate",
+        "Value": "0.00%"
+      }
+    ],
+    "realization": [
+      {
+        "Metric": "Status",
+        "Value": "Insufficient Data"
+      }
+    ],
+    "raw_sales_data": [
+      {
+        "Mark": "CHELAL",
+        "Grade": "OP1",
+        "Lot": "48803.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.0,
+        "Buyer": "GTC",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "OPA",
+        "Lot": "48804.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.47,
+        "Buyer": "CFT",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "FBOPF",
+        "Lot": "48805.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.5,
+        "Buyer": "GTC",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "KIMUNYE",
+        "Grade": "FBOPF",
+        "Lot": "48806.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.44,
+        "Buyer": "UTL",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "IMENTI",
+        "Grade": "OPA",
+        "Lot": "48807.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.4,
+        "Buyer": "JFL",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "IMENTI",
+        "Grade": "FBOPF",
+        "Lot": "48808.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.5,
+        "Buyer": "GTC",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "THUMAITA",
+        "Grade": "OP1",
+        "Lot": "48809.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.06,
+        "Buyer": "GTC",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "THUMAITA",
+        "Grade": "OPA",
+        "Lot": "48810.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.4,
+        "Buyer": "GTC",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "THUMAITA",
+        "Grade": "FBOPF",
+        "Lot": "48811.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.35,
+        "Buyer": "SSO",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "OP1",
+        "Lot": "48812.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.0,
+        "Buyer": "GTC",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "OPA",
+        "Lot": "48813.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.79,
+        "Buyer": "ARM",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "FBOPF",
+        "Lot": "48814.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.35,
+        "Buyer": "SSO",
+        "Broker": "ABBL"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "OPA",
+        "Lot": "10960.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.4,
+        "Buyer": "CFT",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "OP1",
+        "Lot": "10961.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.0,
+        "Buyer": "UTL",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "FBOPF",
+        "Lot": "10962.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.41,
+        "Buyer": "UTL",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "OPA",
+        "Lot": "10963.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.74,
+        "Buyer": "ARM",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "OP1",
+        "Lot": "10964.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.14,
+        "Buyer": "ARM",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "FBOPF",
+        "Lot": "10966.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.36,
+        "Buyer": "SSO",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "OPA",
+        "Lot": "10967.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.22,
+        "Buyer": "CTC",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "FOF",
+        "Lot": "10968.0",
+        "KGs": 60.0,
+        "Price (USD)": 2.72,
+        "Buyer": "MCF",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "OP1",
+        "Lot": "10969.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.02,
+        "Buyer": "UTL",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "OP1",
+        "Lot": "10970.0",
+        "KGs": 34.0,
+        "Price (USD)": 3.98,
+        "Buyer": "GTC",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "FBOPF",
+        "Lot": "10972.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.3,
+        "Buyer": "GTC",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "GITUGI",
+        "Grade": "OPA",
+        "Lot": "10973.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.32,
+        "Buyer": "IMT",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "GITUGI",
+        "Grade": "OP1",
+        "Lot": "10974.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.15,
+        "Buyer": "LAB",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "KIRU",
+        "Grade": "OP1",
+        "Lot": "10979.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.36,
+        "Buyer": "CFT",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "KIRU",
+        "Grade": "FBOPF",
+        "Lot": "10980.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.34,
+        "Buyer": "UTL",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "OPA",
+        "Lot": "10981.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.3,
+        "Buyer": "GTC",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "OP1",
+        "Lot": "10982.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.0,
+        "Buyer": "GTC",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "KANGAITA",
+        "Grade": "OPA",
+        "Lot": "10986.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.3,
+        "Buyer": "GTC",
+        "Broker": "ANJL"
+      },
+      {
+        "Mark": "SIOMO",
+        "Grade": "FBOPFSP",
+        "Lot": "653.0",
+        "KGs": 37.0,
+        "Price (USD)": 3.38,
+        "Buyer": "UTL",
+        "Broker": "ATBL"
+      },
+      {
+        "Mark": "SIOMO",
+        "Grade": "FBOPFSP",
+        "Lot": "654.0",
+        "KGs": 37.0,
+        "Price (USD)": 3.35,
+        "Buyer": "UTL",
+        "Broker": "ATBL"
+      },
+      {
+        "Mark": "SIOMO",
+        "Grade": "OP1",
+        "Lot": "655.0",
+        "KGs": 33.0,
+        "Price (USD)": 3.54,
+        "Buyer": "GTC",
+        "Broker": "ATBL"
+      },
+      {
+        "Mark": "SIOMO",
+        "Grade": "OP1",
+        "Lot": "656.0",
+        "KGs": 33.0,
+        "Price (USD)": 3.54,
+        "Buyer": "EKL",
+        "Broker": "ATBL"
+      },
+      {
+        "Mark": "MABAYI",
+        "Grade": "OPA",
+        "Lot": "35778.0",
+        "KGs": 20.0,
+        "Price (USD)": 2.64,
+        "Buyer": "EKL",
+        "Broker": "ATLS"
+      },
+      {
+        "Mark": "CHINGA",
+        "Grade": "OPA",
+        "Lot": "35779.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.3,
+        "Buyer": "IMT",
+        "Broker": "ATLS"
+      },
+      {
+        "Mark": "CHINGA",
+        "Grade": "OP1",
+        "Lot": "35780.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.22,
+        "Buyer": "LAB",
+        "Broker": "ATLS"
+      },
+      {
+        "Mark": "CHINGA",
+        "Grade": "FBOPF",
+        "Lot": "35781.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.4,
+        "Buyer": "MIL",
+        "Broker": "ATLS"
+      },
+      {
+        "Mark": "IMENTI",
+        "Grade": "OPA",
+        "Lot": "19125.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.38,
+        "Buyer": "JFL",
+        "Broker": "BICL"
+      },
+      {
+        "Mark": "IMENTI",
+        "Grade": "FBOPF",
+        "Lot": "19126.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.0,
+        "Buyer": "UWL",
+        "Broker": "BICL"
+      },
+      {
+        "Mark": "IMENTI",
+        "Grade": "OPA",
+        "Lot": "39602.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.38,
+        "Buyer": "JFL",
+        "Broker": "BTBL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "OPA",
+        "Lot": "39604.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.6,
+        "Buyer": "ARM",
+        "Broker": "BTBL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "OP1",
+        "Lot": "39605.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.06,
+        "Buyer": "ARM",
+        "Broker": "BTBL"
+      },
+      {
+        "Mark": "MICHI",
+        "Grade": "FBOPFSP",
+        "Lot": "39608.0",
+        "KGs": 40.0,
+        "Price (USD)": 4.0,
+        "Buyer": "CFT",
+        "Broker": "BTBL"
+      },
+      {
+        "Mark": "CHINGA",
+        "Grade": "FBOPF",
+        "Lot": "30303.0",
+        "KGs": 45.0,
+        "Price (USD)": 4.14,
+        "Buyer": "EKL",
+        "Broker": "CENT"
+      },
+      {
+        "Mark": "KIRU",
+        "Grade": "OP1",
+        "Lot": "3320.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.18,
+        "Buyer": "EKL",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "OP",
+        "Lot": "3325.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.44,
+        "Buyer": "CFT",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "OP",
+        "Lot": "3326.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.4,
+        "Buyer": "GTC",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "BOP",
+        "Lot": "3327.0",
+        "KGs": 40.0,
+        "Price (USD)": 3.24,
+        "Buyer": "CFT",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "BOP",
+        "Lot": "3328.0",
+        "KGs": 40.0,
+        "Price (USD)": 3.24,
+        "Buyer": "CFT",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "GBOP",
+        "Lot": "3329.0",
+        "KGs": 50.0,
+        "Price (USD)": 3.16,
+        "Buyer": "UTL",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "GBOP",
+        "Lot": "3330.0",
+        "KGs": 50.0,
+        "Price (USD)": 3.12,
+        "Buyer": "GTC",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "FOF",
+        "Lot": "3331.0",
+        "KGs": 65.0,
+        "Price (USD)": 2.8,
+        "Buyer": "MCF",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "MANARET",
+        "Grade": "FOF",
+        "Lot": "3332.0",
+        "KGs": 65.0,
+        "Price (USD)": 2.8,
+        "Buyer": "MCF",
+        "Broker": "COMK"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "OPA",
+        "Lot": "26414.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.3,
+        "Buyer": "CFT",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "OP1",
+        "Lot": "26415.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.0,
+        "Buyer": "GTC",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "CHELAL",
+        "Grade": "FBOPF",
+        "Lot": "26416.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.37,
+        "Buyer": "UTL",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "OPA",
+        "Lot": "26417.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.22,
+        "Buyer": "IMT",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "FBOPF",
+        "Lot": "26420.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.3,
+        "Buyer": "IMT",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "ITUMBE",
+        "Grade": "FOF",
+        "Lot": "26422.0",
+        "KGs": 60.0,
+        "Price (USD)": 2.73,
+        "Buyer": "MCF",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "OPA",
+        "Lot": "26423.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.22,
+        "Buyer": "GTC",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "OPA",
+        "Lot": "26424.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.22,
+        "Buyer": "GTC",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "OP1",
+        "Lot": "26426.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.06,
+        "Buyer": "CFT",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "FOP",
+        "Lot": "26427.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.22,
+        "Buyer": "IMT",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "FOP",
+        "Lot": "26428.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.22,
+        "Buyer": "JFL",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "PEKOE",
+        "Lot": "26429.0",
+        "KGs": 38.0,
+        "Price (USD)": 4.0,
+        "Buyer": "CFT",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "FBOPF",
+        "Lot": "26430.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.4,
+        "Buyer": "UTL",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "FBOPF",
+        "Lot": "26431.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.37,
+        "Buyer": "GTC",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "FBOPFSP",
+        "Lot": "26432.0",
+        "KGs": 40.0,
+        "Price (USD)": 4.32,
+        "Buyer": "CFT",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "FOF",
+        "Lot": "26433.0",
+        "KGs": 60.0,
+        "Price (USD)": 2.76,
+        "Buyer": "MCF",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "MATUNWA",
+        "Grade": "FOF",
+        "Lot": "26434.0",
+        "KGs": 60.0,
+        "Price (USD)": 2.76,
+        "Buyer": "MCF",
+        "Broker": "CTBL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "OPA",
+        "Lot": "21422.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.56,
+        "Buyer": "ARM",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "FOF",
+        "Lot": "21423.0",
+        "KGs": 60.0,
+        "Price (USD)": 2.92,
+        "Buyer": "MCF",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "OP1",
+        "Lot": "21424.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.22,
+        "Buyer": "ARM",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "FOP",
+        "Lot": "21425.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.58,
+        "Buyer": "ARM",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "FBOPF",
+        "Lot": "21426.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.37,
+        "Buyer": "SSO",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "PEKOE",
+        "Lot": "21427.0",
+        "KGs": 38.0,
+        "Price (USD)": 3.62,
+        "Buyer": "CFT",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "KIRU",
+        "Grade": "OP1",
+        "Lot": "21429.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.2,
+        "Buyer": "CFT",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "KIRU",
+        "Grade": "OPA",
+        "Lot": "21430.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.32,
+        "Buyer": "ARM",
+        "Broker": "PTBL"
+      },
+      {
+        "Mark": "CHINGA",
+        "Grade": "OPA",
+        "Lot": "8412.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.72,
+        "Buyer": "UTL",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "GITUGI",
+        "Grade": "OP1",
+        "Lot": "8416.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.14,
+        "Buyer": "GTC",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "GITUGI",
+        "Grade": "FOP",
+        "Lot": "8417.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.67,
+        "Buyer": "CFT",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "GITUGI",
+        "Grade": "FBOPF",
+        "Lot": "8418.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.35,
+        "Buyer": "GTC",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "GITUGI",
+        "Grade": "FOF",
+        "Lot": "8420.0",
+        "KGs": 60.0,
+        "Price (USD)": 3.0,
+        "Buyer": "MIL",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "OPA",
+        "Lot": "8421.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.74,
+        "Buyer": "CFT",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "OP1",
+        "Lot": "8422.0",
+        "KGs": 34.0,
+        "Price (USD)": 4.21,
+        "Buyer": "UTL",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "FOP",
+        "Lot": "8423.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.66,
+        "Buyer": "ARM",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "PEKOE",
+        "Lot": "8424.0",
+        "KGs": 38.0,
+        "Price (USD)": 4.52,
+        "Buyer": "JFL",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "FBOPF",
+        "Lot": "8425.0",
+        "KGs": 45.0,
+        "Price (USD)": 3.4,
+        "Buyer": "GTC",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KAGWE",
+        "Grade": "FBOPFSP",
+        "Lot": "8426.0",
+        "KGs": 40.0,
+        "Price (USD)": 4.22,
+        "Buyer": "UTL",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "CUPATEA",
+        "Grade": "OP1",
+        "Lot": "8427.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.0,
+        "Buyer": "GTC",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "CUPATEA",
+        "Grade": "FOP",
+        "Lot": "8428.0",
+        "KGs": 35.0,
+        "Price (USD)": 2.92,
+        "Buyer": "CFT",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KABIANGA",
+        "Grade": "PEKOE",
+        "Lot": "8430.0",
+        "KGs": 30.0,
+        "Price (USD)": 3.2,
+        "Buyer": "CFT",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KABIANGA",
+        "Grade": "GFBOP",
+        "Lot": "8431.0",
+        "KGs": 60.0,
+        "Price (USD)": 2.6,
+        "Buyer": "UTL",
+        "Broker": "TBEA"
+      },
+      {
+        "Mark": "KANGAITA",
+        "Grade": "OPA",
+        "Lot": "17362.0",
+        "KGs": 25.0,
+        "Price (USD)": 3.35,
+        "Buyer": "CFT",
+        "Broker": "VENS"
+      }
+    ]
+  },
+  "outlook": {
+    "next_sale": "2025-39",
+    "forthcoming_offerings_kgs": "25,504",
+    "weather_outlook": "Seasonal weather patterns are prevailing in the key growing regions supplying Mombasa. Production levels are reported as stable.",
+    "market_prediction": "Based on current demand trends, the market is expected to remain active. Buyers are advised to monitor global economic indicators and currency fluctuations which may impact pricing in the coming weeks."
+  },
+  "data_sources": {
+    "source_sales_week": [
+      {
+        "id": 7958,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "CHELAL",
+        "grade": "OP1",
+        "lot_number": "48803.0",
+        "invoice_number": "CL25260177",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.0,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 136.0
+      },
+      {
+        "id": 7959,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "CHELAL",
+        "grade": "OPA",
+        "lot_number": "48804.0",
+        "invoice_number": "CL25260127",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.47,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 86.75
+      },
+      {
+        "id": 7960,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "CHELAL",
+        "grade": "FBOPF",
+        "lot_number": "48805.0",
+        "invoice_number": "CL25260197",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.5,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 157.5
+      },
+      {
+        "id": 7961,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "KIMUNYE",
+        "grade": "FBOPF",
+        "lot_number": "48806.0",
+        "invoice_number": "KM24251954",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.44,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 154.8
+      },
+      {
+        "id": 7962,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "IMENTI",
+        "grade": "OPA",
+        "lot_number": "48807.0",
+        "invoice_number": "IM25260176",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.4,
+        "buyer": "JFL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 85.0
+      },
+      {
+        "id": 7963,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "IMENTI",
+        "grade": "FBOPF",
+        "lot_number": "48808.0",
+        "invoice_number": "IM25260137",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.5,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 157.5
+      },
+      {
+        "id": 7964,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "THUMAITA",
+        "grade": "OP1",
+        "lot_number": "48809.0",
+        "invoice_number": "TM24252165",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.06,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 138.04
+      },
+      {
+        "id": 7965,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "THUMAITA",
+        "grade": "OPA",
+        "lot_number": "48810.0",
+        "invoice_number": "TM25260049",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.4,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 85.0
+      },
+      {
+        "id": 7966,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "THUMAITA",
+        "grade": "FBOPF",
+        "lot_number": "48811.0",
+        "invoice_number": "TM24252220",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.35,
+        "buyer": "SSO",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 150.75
+      },
+      {
+        "id": 7967,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "MICHI",
+        "grade": "OP1",
+        "lot_number": "48812.0",
+        "invoice_number": "TN25260264",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.0,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 136.0
+      },
+      {
+        "id": 7968,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "MICHI",
+        "grade": "OPA",
+        "lot_number": "48813.0",
+        "invoice_number": "TN25260262",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.79,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 94.75
+      },
+      {
+        "id": 7969,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ABBL",
+        "mark": "MICHI",
+        "grade": "FBOPF",
+        "lot_number": "48814.0",
+        "invoice_number": "TN25260258",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.35,
+        "buyer": "SSO",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 150.75
+      },
+      {
+        "id": 8326,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "CHELAL",
+        "grade": "OPA",
+        "lot_number": "10960.0",
+        "invoice_number": "CL25260112",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.4,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 85.0
+      },
+      {
+        "id": 8327,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "CHELAL",
+        "grade": "OP1",
+        "lot_number": "10961.0",
+        "invoice_number": "CL25260156",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.0,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 136.0
+      },
+      {
+        "id": 8328,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "CHELAL",
+        "grade": "FBOPF",
+        "lot_number": "10962.0",
+        "invoice_number": "CL25260176",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.41,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 153.45000000000002
+      },
+      {
+        "id": 8329,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "KAGWE",
+        "grade": "OPA",
+        "lot_number": "10963.0",
+        "invoice_number": "KW25260276",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.74,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 93.5
+      },
+      {
+        "id": 8330,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "KAGWE",
+        "grade": "OP1",
+        "lot_number": "10964.0",
+        "invoice_number": "KW25260246",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.14,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 140.76
+      },
+      {
+        "id": 8331,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "KAGWE",
+        "grade": "FBOPF",
+        "lot_number": "10966.0",
+        "invoice_number": "KW25260267",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.36,
+        "buyer": "SSO",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 151.2
+      },
+      {
+        "id": 8332,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "ITUMBE",
+        "grade": "OPA",
+        "lot_number": "10967.0",
+        "invoice_number": "IT25260221",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.22,
+        "buyer": "CTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 80.5
+      },
+      {
+        "id": 8333,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "ITUMBE",
+        "grade": "FOF",
+        "lot_number": "10968.0",
+        "invoice_number": "IT25260234",
+        "quantity_kgs": 60.0,
+        "package_count": null,
+        "price": 2.72,
+        "buyer": "MCF",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 60.0,
+        "value_usd": 163.20000000000002
+      },
+      {
+        "id": 8334,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "ITUMBE",
+        "grade": "OP1",
+        "lot_number": "10969.0",
+        "invoice_number": "IT25260098",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.02,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 136.67999999999998
+      },
+      {
+        "id": 8335,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "ITUMBE",
+        "grade": "OP1",
+        "lot_number": "10970.0",
+        "invoice_number": "IT25260231",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 3.98,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 135.32
+      },
+      {
+        "id": 8336,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "ITUMBE",
+        "grade": "FBOPF",
+        "lot_number": "10972.0",
+        "invoice_number": "IT25260226",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.3,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 148.5
+      },
+      {
+        "id": 8337,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "GITUGI",
+        "grade": "OPA",
+        "lot_number": "10973.0",
+        "invoice_number": "GI25260182",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.32,
+        "buyer": "IMT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 83.0
+      },
+      {
+        "id": 8338,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "GITUGI",
+        "grade": "OP1",
+        "lot_number": "10974.0",
+        "invoice_number": "GI25260203",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.15,
+        "buyer": "LAB",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 141.10000000000002
+      },
+      {
+        "id": 8339,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "KIRU",
+        "grade": "OP1",
+        "lot_number": "10979.0",
+        "invoice_number": "KU25260143",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.36,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 148.24
+      },
+      {
+        "id": 8340,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "KIRU",
+        "grade": "FBOPF",
+        "lot_number": "10980.0",
+        "invoice_number": "KU25260172",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.34,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 150.29999999999998
+      },
+      {
+        "id": 8341,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "MICHI",
+        "grade": "OPA",
+        "lot_number": "10981.0",
+        "invoice_number": "TN25260261",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.3,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 82.5
+      },
+      {
+        "id": 8342,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "MICHI",
+        "grade": "OP1",
+        "lot_number": "10982.0",
+        "invoice_number": "TN25260252",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.0,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 136.0
+      },
+      {
+        "id": 8343,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ANJL",
+        "mark": "KANGAITA",
+        "grade": "OPA",
+        "lot_number": "10986.0",
+        "invoice_number": "KN25260253",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.3,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 82.5
+      },
+      {
+        "id": 8564,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATBL",
+        "mark": "SIOMO",
+        "grade": "FBOPFSP",
+        "lot_number": "653.0",
+        "invoice_number": "2562767",
+        "quantity_kgs": 37.0,
+        "package_count": null,
+        "price": 3.38,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 37.0,
+        "value_usd": 125.06
+      },
+      {
+        "id": 8565,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATBL",
+        "mark": "SIOMO",
+        "grade": "FBOPFSP",
+        "lot_number": "654.0",
+        "invoice_number": "2562768",
+        "quantity_kgs": 37.0,
+        "package_count": null,
+        "price": 3.35,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 37.0,
+        "value_usd": 123.95
+      },
+      {
+        "id": 8566,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATBL",
+        "mark": "SIOMO",
+        "grade": "OP1",
+        "lot_number": "655.0",
+        "invoice_number": "2562745",
+        "quantity_kgs": 33.0,
+        "package_count": null,
+        "price": 3.54,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 33.0,
+        "value_usd": 116.82000000000001
+      },
+      {
+        "id": 8567,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATBL",
+        "mark": "SIOMO",
+        "grade": "OP1",
+        "lot_number": "656.0",
+        "invoice_number": "2562746",
+        "quantity_kgs": 33.0,
+        "package_count": null,
+        "price": 3.54,
+        "buyer": "EKL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 33.0,
+        "value_usd": 116.82000000000001
+      },
+      {
+        "id": 8719,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATLS",
+        "mark": "MABAYI",
+        "grade": "OPA",
+        "lot_number": "35778.0",
+        "invoice_number": "25001",
+        "quantity_kgs": 20.0,
+        "package_count": null,
+        "price": 2.64,
+        "buyer": "EKL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 20.0,
+        "value_usd": 52.800000000000004
+      },
+      {
+        "id": 8720,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATLS",
+        "mark": "CHINGA",
+        "grade": "OPA",
+        "lot_number": "35779.0",
+        "invoice_number": "CH24251638",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.3,
+        "buyer": "IMT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 82.5
+      },
+      {
+        "id": 8721,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATLS",
+        "mark": "CHINGA",
+        "grade": "OP1",
+        "lot_number": "35780.0",
+        "invoice_number": "CH25260126",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.22,
+        "buyer": "LAB",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 143.48
+      },
+      {
+        "id": 8722,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "ATLS",
+        "mark": "CHINGA",
+        "grade": "FBOPF",
+        "lot_number": "35781.0",
+        "invoice_number": "CH25260166",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.4,
+        "buyer": "MIL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 153.0
+      },
+      {
+        "id": 8779,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "BICL",
+        "mark": "IMENTI",
+        "grade": "OPA",
+        "lot_number": "19125.0",
+        "invoice_number": "IM25260228",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.38,
+        "buyer": "JFL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 84.5
+      },
+      {
+        "id": 8780,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "BICL",
+        "mark": "IMENTI",
+        "grade": "FBOPF",
+        "lot_number": "19126.0",
+        "invoice_number": "IM25260229",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.0,
+        "buyer": "UWL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 135.0
+      },
+      {
+        "id": 8860,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "BTBL",
+        "mark": "IMENTI",
+        "grade": "OPA",
+        "lot_number": "39602.0",
+        "invoice_number": "IM25260213",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.38,
+        "buyer": "JFL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 84.5
+      },
+      {
+        "id": 8861,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "BTBL",
+        "mark": "MICHI",
+        "grade": "OPA",
+        "lot_number": "39604.0",
+        "invoice_number": "TN25260259",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.6,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 90.0
+      },
+      {
+        "id": 8862,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "BTBL",
+        "mark": "MICHI",
+        "grade": "OP1",
+        "lot_number": "39605.0",
+        "invoice_number": "TN25260242",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.06,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 138.04
+      },
+      {
+        "id": 8863,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "BTBL",
+        "mark": "MICHI",
+        "grade": "FBOPFSP",
+        "lot_number": "39608.0",
+        "invoice_number": "TN25260263",
+        "quantity_kgs": 40.0,
+        "package_count": null,
+        "price": 4.0,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 40.0,
+        "value_usd": 160.0
+      },
+      {
+        "id": 8940,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CENT",
+        "mark": "CHINGA",
+        "grade": "FBOPF",
+        "lot_number": "30303.0",
+        "invoice_number": "CH25260102",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 4.14,
+        "buyer": "EKL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 186.29999999999998
+      },
+      {
+        "id": 9247,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "KIRU",
+        "grade": "OP1",
+        "lot_number": "3320.0",
+        "invoice_number": "KU25260162",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.18,
+        "buyer": "EKL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 142.12
+      },
+      {
+        "id": 9248,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "OP",
+        "lot_number": "3325.0",
+        "invoice_number": "1997",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.44,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 103.2
+      },
+      {
+        "id": 9249,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "OP",
+        "lot_number": "3326.0",
+        "invoice_number": "2005",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.4,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 102.0
+      },
+      {
+        "id": 9250,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "BOP",
+        "lot_number": "3327.0",
+        "invoice_number": "1777",
+        "quantity_kgs": 40.0,
+        "package_count": null,
+        "price": 3.24,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 40.0,
+        "value_usd": 129.60000000000002
+      },
+      {
+        "id": 9251,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "BOP",
+        "lot_number": "3328.0",
+        "invoice_number": "1791",
+        "quantity_kgs": 40.0,
+        "package_count": null,
+        "price": 3.24,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 40.0,
+        "value_usd": 129.60000000000002
+      },
+      {
+        "id": 9252,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "GBOP",
+        "lot_number": "3329.0",
+        "invoice_number": "1891",
+        "quantity_kgs": 50.0,
+        "package_count": null,
+        "price": 3.16,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 50.0,
+        "value_usd": 158.0
+      },
+      {
+        "id": 9253,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "GBOP",
+        "lot_number": "3330.0",
+        "invoice_number": "1902",
+        "quantity_kgs": 50.0,
+        "package_count": null,
+        "price": 3.12,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 50.0,
+        "value_usd": 156.0
+      },
+      {
+        "id": 9254,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "FOF",
+        "lot_number": "3331.0",
+        "invoice_number": "1645",
+        "quantity_kgs": 65.0,
+        "package_count": null,
+        "price": 2.8,
+        "buyer": "MCF",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 65.0,
+        "value_usd": 182.0
+      },
+      {
+        "id": 9255,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "COMK",
+        "mark": "MANARET",
+        "grade": "FOF",
+        "lot_number": "3332.0",
+        "invoice_number": "1745",
+        "quantity_kgs": 65.0,
+        "package_count": null,
+        "price": 2.8,
+        "buyer": "MCF",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 65.0,
+        "value_usd": 182.0
+      },
+      {
+        "id": 9425,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "CHELAL",
+        "grade": "OPA",
+        "lot_number": "26414.0",
+        "invoice_number": "CL25260028",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.3,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 82.5
+      },
+      {
+        "id": 9426,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "CHELAL",
+        "grade": "OP1",
+        "lot_number": "26415.0",
+        "invoice_number": "CL25260109",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.0,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 136.0
+      },
+      {
+        "id": 9427,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "CHELAL",
+        "grade": "FBOPF",
+        "lot_number": "26416.0",
+        "invoice_number": "CL25260169",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.37,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 151.65
+      },
+      {
+        "id": 9428,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "ITUMBE",
+        "grade": "OPA",
+        "lot_number": "26417.0",
+        "invoice_number": "IT25260241",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.22,
+        "buyer": "IMT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 80.5
+      },
+      {
+        "id": 9429,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "ITUMBE",
+        "grade": "FBOPF",
+        "lot_number": "26420.0",
+        "invoice_number": "IT25260235",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.3,
+        "buyer": "IMT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 148.5
+      },
+      {
+        "id": 9430,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "ITUMBE",
+        "grade": "FOF",
+        "lot_number": "26422.0",
+        "invoice_number": "IT25260232",
+        "quantity_kgs": 60.0,
+        "package_count": null,
+        "price": 2.73,
+        "buyer": "MCF",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 60.0,
+        "value_usd": 163.8
+      },
+      {
+        "id": 9431,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "OPA",
+        "lot_number": "26423.0",
+        "invoice_number": "MA25260164",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.22,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 80.5
+      },
+      {
+        "id": 9432,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "OPA",
+        "lot_number": "26424.0",
+        "invoice_number": "MA25260174",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.22,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 80.5
+      },
+      {
+        "id": 9433,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "OP1",
+        "lot_number": "26426.0",
+        "invoice_number": "MA25260176",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.06,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 138.04
+      },
+      {
+        "id": 9434,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "FOP",
+        "lot_number": "26427.0",
+        "invoice_number": "MA25260169",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.22,
+        "buyer": "IMT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 96.60000000000001
+      },
+      {
+        "id": 9435,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "FOP",
+        "lot_number": "26428.0",
+        "invoice_number": "MA25260181",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.22,
+        "buyer": "JFL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 96.60000000000001
+      },
+      {
+        "id": 9436,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "PEKOE",
+        "lot_number": "26429.0",
+        "invoice_number": "MA25260183",
+        "quantity_kgs": 38.0,
+        "package_count": null,
+        "price": 4.0,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 38.0,
+        "value_usd": 152.0
+      },
+      {
+        "id": 9437,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "FBOPF",
+        "lot_number": "26430.0",
+        "invoice_number": "MA25260180",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.4,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 153.0
+      },
+      {
+        "id": 9438,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "FBOPF",
+        "lot_number": "26431.0",
+        "invoice_number": "MA25260184",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.37,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 151.65
+      },
+      {
+        "id": 9439,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "FBOPFSP",
+        "lot_number": "26432.0",
+        "invoice_number": "MA25260171",
+        "quantity_kgs": 40.0,
+        "package_count": null,
+        "price": 4.32,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 40.0,
+        "value_usd": 172.8
+      },
+      {
+        "id": 9440,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "FOF",
+        "lot_number": "26433.0",
+        "invoice_number": "MA24250668",
+        "quantity_kgs": 60.0,
+        "package_count": null,
+        "price": 2.76,
+        "buyer": "MCF",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 60.0,
+        "value_usd": 165.6
+      },
+      {
+        "id": 9441,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "CTBL",
+        "mark": "MATUNWA",
+        "grade": "FOF",
+        "lot_number": "26434.0",
+        "invoice_number": "MA25260182",
+        "quantity_kgs": 60.0,
+        "package_count": null,
+        "price": 2.76,
+        "buyer": "MCF",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 60.0,
+        "value_usd": 165.6
+      },
+      {
+        "id": 9634,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KAGWE",
+        "grade": "OPA",
+        "lot_number": "21422.0",
+        "invoice_number": "KW25260247",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.56,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 89.0
+      },
+      {
+        "id": 9635,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KAGWE",
+        "grade": "FOF",
+        "lot_number": "21423.0",
+        "invoice_number": "KW25260251",
+        "quantity_kgs": 60.0,
+        "package_count": null,
+        "price": 2.92,
+        "buyer": "MCF",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 60.0,
+        "value_usd": 175.2
+      },
+      {
+        "id": 9636,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KAGWE",
+        "grade": "OP1",
+        "lot_number": "21424.0",
+        "invoice_number": "KW25260260",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.22,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 143.48
+      },
+      {
+        "id": 9637,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KAGWE",
+        "grade": "FOP",
+        "lot_number": "21425.0",
+        "invoice_number": "KW25260261",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.58,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 107.4
+      },
+      {
+        "id": 9638,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KAGWE",
+        "grade": "FBOPF",
+        "lot_number": "21426.0",
+        "invoice_number": "KW25260245",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.37,
+        "buyer": "SSO",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 151.65
+      },
+      {
+        "id": 9639,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KAGWE",
+        "grade": "PEKOE",
+        "lot_number": "21427.0",
+        "invoice_number": "KW25260268",
+        "quantity_kgs": 38.0,
+        "package_count": null,
+        "price": 3.62,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 38.0,
+        "value_usd": 137.56
+      },
+      {
+        "id": 9640,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KIRU",
+        "grade": "OP1",
+        "lot_number": "21429.0",
+        "invoice_number": "KU25260173",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.2,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 142.8
+      },
+      {
+        "id": 9641,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "PTBL",
+        "mark": "KIRU",
+        "grade": "OPA",
+        "lot_number": "21430.0",
+        "invoice_number": "KU25260174",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.32,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 83.0
+      },
+      {
+        "id": 10051,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "CHINGA",
+        "grade": "OPA",
+        "lot_number": "8412.0",
+        "invoice_number": "CH25260064",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.72,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 93.0
+      },
+      {
+        "id": 10052,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "GITUGI",
+        "grade": "OP1",
+        "lot_number": "8416.0",
+        "invoice_number": "GI25260161",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.14,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 140.76
+      },
+      {
+        "id": 10053,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "GITUGI",
+        "grade": "FOP",
+        "lot_number": "8417.0",
+        "invoice_number": "GI25260206",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.67,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 110.1
+      },
+      {
+        "id": 10054,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "GITUGI",
+        "grade": "FBOPF",
+        "lot_number": "8418.0",
+        "invoice_number": "GI25260191",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.35,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 150.75
+      },
+      {
+        "id": 10055,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "GITUGI",
+        "grade": "FOF",
+        "lot_number": "8420.0",
+        "invoice_number": "GI25260192",
+        "quantity_kgs": 60.0,
+        "package_count": null,
+        "price": 3.0,
+        "buyer": "MIL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 60.0,
+        "value_usd": 180.0
+      },
+      {
+        "id": 10056,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KAGWE",
+        "grade": "OPA",
+        "lot_number": "8421.0",
+        "invoice_number": "KW25260220",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.74,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 93.5
+      },
+      {
+        "id": 10057,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KAGWE",
+        "grade": "OP1",
+        "lot_number": "8422.0",
+        "invoice_number": "KW25260269",
+        "quantity_kgs": 34.0,
+        "package_count": null,
+        "price": 4.21,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 34.0,
+        "value_usd": 143.14
+      },
+      {
+        "id": 10058,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KAGWE",
+        "grade": "FOP",
+        "lot_number": "8423.0",
+        "invoice_number": "KW25260242",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.66,
+        "buyer": "ARM",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 109.80000000000001
+      },
+      {
+        "id": 10059,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KAGWE",
+        "grade": "PEKOE",
+        "lot_number": "8424.0",
+        "invoice_number": "KW25260252",
+        "quantity_kgs": 38.0,
+        "package_count": null,
+        "price": 4.52,
+        "buyer": "JFL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 38.0,
+        "value_usd": 171.76
+      },
+      {
+        "id": 10060,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KAGWE",
+        "grade": "FBOPF",
+        "lot_number": "8425.0",
+        "invoice_number": "KW25260226",
+        "quantity_kgs": 45.0,
+        "package_count": null,
+        "price": 3.4,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 45.0,
+        "value_usd": 153.0
+      },
+      {
+        "id": 10061,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KAGWE",
+        "grade": "FBOPFSP",
+        "lot_number": "8426.0",
+        "invoice_number": "KW25260227",
+        "quantity_kgs": 40.0,
+        "package_count": null,
+        "price": 4.22,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 40.0,
+        "value_usd": 168.79999999999998
+      },
+      {
+        "id": 10062,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "CUPATEA",
+        "grade": "OP1",
+        "lot_number": "8427.0",
+        "invoice_number": "818/25",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.0,
+        "buyer": "GTC",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 90.0
+      },
+      {
+        "id": 10063,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "CUPATEA",
+        "grade": "FOP",
+        "lot_number": "8428.0",
+        "invoice_number": "819/25",
+        "quantity_kgs": 35.0,
+        "package_count": null,
+        "price": 2.92,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 35.0,
+        "value_usd": 102.2
+      },
+      {
+        "id": 10064,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KABIANGA",
+        "grade": "PEKOE",
+        "lot_number": "8430.0",
+        "invoice_number": "822/25",
+        "quantity_kgs": 30.0,
+        "package_count": null,
+        "price": 3.2,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 30.0,
+        "value_usd": 96.0
+      },
+      {
+        "id": 10065,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "TBEA",
+        "mark": "KABIANGA",
+        "grade": "GFBOP",
+        "lot_number": "8431.0",
+        "invoice_number": "552/25",
+        "quantity_kgs": 60.0,
+        "package_count": null,
+        "price": 2.6,
+        "buyer": "UTL",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 60.0,
+        "value_usd": 156.0
+      },
+      {
+        "id": 10557,
+        "source_location": "Mombasa",
+        "sale_date": "2024-09-24",
+        "sale_number": "2024-38",
+        "broker": "VENS",
+        "mark": "KANGAITA",
+        "grade": "OPA",
+        "lot_number": "17362.0",
+        "invoice_number": "KN25260269",
+        "quantity_kgs": 25.0,
+        "package_count": null,
+        "price": 3.35,
+        "buyer": "CFT",
+        "source_file_identifier": "GeneralReport (89).xlsx::General Report",
+        "processed_timestamp": "2025-10-19T21:29:33.741475",
+        "total_weight_kgs": 25.0,
+        "value_usd": 83.75
+      }
+    ],
+    "source_prev_grade_metrics": [],
+    "source_prev_broker_metrics": [],
+    "source_movement_data": []
+  }
+}

@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6152394247686137"
+     crossorigin="anonymous"></script>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="c372e1d7-3c7e-4d0a-9cee-23e8ef283836" type="text/javascript" async></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7CQLXXEKCE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7CQLXXEKCE');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Report Viewer - TeaTrade</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+</head>
+<body class="market-reports-page report-viewer-body">
+    <header class="site-header">
+        <div class="header-top-bar">
+            <a href="corporate.html" class="header-logo"><h1>Tea<span>Trade</span></h1></a>
+            <div class="header-search-wrapper"><input type="text" class="header-search-bar" placeholder="Global site search..."></div>
+            <div class="user-actions">
+                <a href="signup.html" title="Create Account"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="17" y1="11" x2="23" y2="11"></line></svg></a>
+                <a href="login.html" title="Sign In"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg></a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+        <nav class="secondary-nav">
+            <ul>
+                <li><a href="data.html">Data</a></li>
+                <li><a href="market-reports.html" class="active">Market Reports</a></li>
+                <li><a href="#">Auctions</a></li>
+                <li><a href="visuals.html">Visuals</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        
+        <div style="margin-bottom: 15px;">
+            <a href="market-reports.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                Back to Library
+            </a>
+        </div>
+
+        <div class="dashboard-header">
+            <h2 class="page-title" id="report-title">Loading Report...</h2>
+            <p id="report-metadata" class="report-meta-text"></p>
+        </div>
+        
+        <div id="report-content" style="display: none;">
+            
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <h3>Total Volume (kg)</h3>
+                    <p class="kpi-value" id="kpi-volume">--</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>Average Price (USD/kg)</h3>
+                    <p class="kpi-value" id="kpi-avg-price">--</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>Price Movement</h3>
+                    <p class="kpi-value" id="kpi-price-change">--</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>Sell-Through Rate</h3>
+                    <p class="kpi-value" id="kpi-sell-through">--</p>
+                </div>
+            </div>
+
+            <div class="kpi-card snapshot-card">
+                <h3 class="card-title-inline">Market Snapshot</h3>
+                <p id="kpi-snapshot"></p>
+            </div>
+
+            <div class="report-card">
+                <h3 class="card-title">Interactive Market Analysis & Comparison</h3>
+                <p class="section-commentary">Analyze the distribution of prices across the auction. Use the top chart to filter the Grade and Broker performance charts below by clicking and dragging a selection. Black ticks indicate the results from the previous auction.</p>
+                
+                <div class="interactive-analysis-layout">
+                    <div id="chart-interactive-distribution" class="chart-container"></div>
+                    <div class="interactive-analysis-bottom-row">
+                        <div id="chart-interactive-grade" class="chart-container"></div>
+                        <div id="chart-interactive-broker" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <h3 class="card-title">Buyer Activity & Drill-down</h3>
+                <p class="section-commentary">Overview of the top purchasing entities. Select the desired metric (Value or Volume) using the switch below and click on a specific buyer's bar on the left to analyze their purchases by grade on the right.</p>
+                
+                <div class="buyer-activity-layout">
+                    <div id="chart-buyers-main" class="chart-container"></div>
+                    <div id="chart-buyers-breakdown" class="chart-container"></div>
+                </div>
+            </div>
+                
+            
+            <div class="report-card">
+                <h3 class="card-title">Auction Metrics</h3>
+                <p class="section-commentary">Detailed statistics regarding the efficiency and performance of the auction process.</p>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <h4>Sell-Through (Absorption)</h4>
+                        <p>Indicates the percentage of lots offered that were successfully sold. High absorption reflects strong demand.</p>
+                        <div id="table-sell-through"></div>
+                    </div>
+                    <div class="metric-item">
+                        <h4>Price Realization (vs Valuation)</h4>
+                        <p>Compares the actual sale price against the broker's valuation or reserve price (if available).</p>
+                        <div id="table-realization"></div>
+                    </div>
+                     <div class="metric-item">
+                        <h4>Data Status</h4>
+                        <p>Information regarding the completeness of the data utilized in this analysis.</p>
+                        <table class="data-table">
+                            <tbody>
+                                <tr><td>Status</td><td>Provisional</td></tr>
+                                <tr><td>Note</td><td>Awaiting final confirmation on select lots.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="report-card">
+                <h3 class="card-title">Detailed Price Analysis & Insights</h3>
+                 <p class="section-commentary">A deep dive into week-over-week price movements for specific garden and grade combinations, highlighting significant changes. Hover over the candlesticks for details.</p>
+                <div class="analysis-grid">
+                    <div class="analysis-chart">
+                         <div id="chart-candlestick" class="chart-container"></div>
+                         <p class="chart-description">Candlestick shows movement from Previous Avg (Open) to Current Avg (Close). Wicks show the High/Low range for the week.</p>
+                    </div>
+                    <div class="analysis-insights">
+                        <h4>Key Insights (Week-over-Week)</h4>
+                        <p id="analytical-insights" style="white-space: pre-wrap; line-height: 1.6;">Loading insights...</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="report-card outlook-card">
+                <h3 class="card-title">Market Outlook & Forecast</h3>
+                <p class="section-commentary">Forward-looking information regarding upcoming offerings, environmental factors, and market predictions.</p>
+                <div class="outlook-grid">
+                    <div class="outlook-item">
+                        <h4>Forthcoming Offerings (Next Sale: <span id="outlook-next-sale">N/A</span>)</h4>
+                        <p class="kpi-value" id="outlook-offerings">--</p>
+                    </div>
+                    <div class="outlook-item">
+                         <h4>Weather Outlook (Growing Regions)</h4>
+                        <p id="outlook-weather">--</p>
+                    </div>
+                    <div class="outlook-item" id="outlook-prediction-container">
+                         <h4>Market Prediction & Strategy</h4>
+                        <p id="outlook-prediction">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <h3 class="card-title">Detailed Sales Data (Pivot View)</h3>
+                <p class="section-commentary">Explore the raw transaction data. Use the filters in the column headers (featuring autocomplete) or the global search. The table uses infinite scrolling for navigation.</p>
+                <div class="table-controls">
+                    <input type="text" id="table-search" placeholder="Global search..." class="page-search-bar" style="width: 250px; margin-bottom: 10px;">
+                    <button id="toggle-grouping" class="simple-button">Group by Mark</button>
+                    <button id="clear-grouping" class="simple-button">Clear Grouping</button>
+                </div>
+                <div id="table-raw-data"></div>
+            </div>
+
+        </div>
+        
+        <div id="error-message" class="error-container">
+            <p>Error loading report data. Please check the URL and try again.</p>
+        </div>
+
+    </main>
+
+    <script src="script.js" defer></script>
+    <script>
+        // (JavaScript remains the same as the previous optimized version)
+        let rawDataTable; 
+        let currentGroupBy = null;
+        const vegaViews = {};
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // (Mobile menu init and event listeners remain the same)
+            if (typeof initializeMobileMenu === 'function') {
+                initializeMobileMenu();
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataUrl = urlParams.get('data');
+
+            if (dataUrl) {
+                const decodedUrl = decodeURIComponent(dataUrl);
+                fetchReportData(decodedUrl);
+            } else {
+                showError("No data source specified in URL.");
+            }
+
+            document.getElementById('table-search').addEventListener('keyup', function() {
+                if (rawDataTable) {
+                    var value = this.value;
+                    rawDataTable.setFilter([
+                        [
+                            {field:"Mark", type:"like", value:value},
+                            {field:"Grade", type:"like", value:value},
+                            {field:"Lot", type:"like", value:value},
+                            {field:"Buyer", type:"like", value:value},
+                            {field:"Broker", type:"like", value:value},
+                        ]
+                    ]);
+                }
+            });
+
+            document.getElementById('toggle-grouping').addEventListener('click', () => {
+                if (rawDataTable) {
+                    if (currentGroupBy === 'Mark') {
+                        rawDataTable.setGroupBy('Grade');
+                        currentGroupBy = 'Grade';
+                        document.getElementById('toggle-grouping').textContent = 'Group by Broker';
+                    } else if (currentGroupBy === 'Grade') {
+                         rawDataTable.setGroupBy('Broker');
+                        currentGroupBy = 'Broker';
+                        document.getElementById('toggle-grouping').textContent = 'Group by Mark';
+                    }
+                    else {
+                        rawDataTable.setGroupBy('Mark');
+                        currentGroupBy = 'Mark';
+                        document.getElementById('toggle-grouping').textContent = 'Group by Grade';
+                    }
+                }
+            });
+
+            document.getElementById('clear-grouping').addEventListener('click', () => {
+                if (rawDataTable) {
+                    rawDataTable.setGroupBy(false);
+                    currentGroupBy = null;
+                    document.getElementById('toggle-grouping').textContent = 'Group by Mark';
+                }
+            });
+
+            window.addEventListener('resize', debounce(handleResize, 250));
+        });
+
+        // (debounce and handleResize functions remain the same)
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function handleResize() {
+            Object.values(vegaViews).forEach(view => {
+                if (view) {
+                    view.resize().runAsync();
+                }
+            });
+        }
+
+
+        async function fetchReportData(url) {
+             try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const reportData = await response.json();
+                await renderReport(reportData);
+            } catch (error) {
+                console.error('Error fetching report data:', error);
+                showError(error.message);
+            }
+        }
+
+        async function renderReport(data) {
+            // 1. Metadata and KPIs (Remains the same)
+            const meta = data.metadata;
+            document.getElementById('report-title').textContent = `${meta.location} Auction - Sale ${meta.sale_num_only} (${meta.year})`;
+            document.getElementById('report-metadata').textContent = `Date: ${meta.sale_date} | Generated: ${new Date(meta.generated_at).toLocaleString()}`;
+            document.title = `${meta.location} Sale ${meta.sale_num_only} Report - TeaTrade`;
+
+            const kpis = data.kpis;
+            document.getElementById('kpi-volume').textContent = kpis.TOTAL_VOLUME || '--';
+            document.getElementById('kpi-avg-price').textContent = kpis.AVG_PRICE || '--';
+            document.getElementById('kpi-sell-through').textContent = kpis.SELL_THROUGH_RATE || '--';
+            document.getElementById('kpi-snapshot').textContent = kpis.SNAPSHOT || 'Awaiting data.';
+
+            const priceChangeElement = document.getElementById('kpi-price-change');
+            priceChangeElement.textContent = kpis.PRICE_CHANGE || '--';
+            if (kpis.PRICE_CHANGE_CLASS === 'positive') {
+                priceChangeElement.style.color = '#34a853';
+            } else if (kpis.PRICE_CHANGE_CLASS === 'negative') {
+                priceChangeElement.style.color = '#ea4335';
+            } else {
+                priceChangeElement.style.color = 'inherit';
+            }
+
+            // Show content BEFORE rendering charts to ensure layout dimensions are calculated.
+             document.getElementById('report-content').style.display = 'block';
+
+            // 3. Charts
+            // PERFORMANCE FIX: Extract the centralized data sources
+            const dataSources = data.data_sources || {};
+
+            // Render charts concurrently, passing the data sources for injection
+            const chartPromises = [
+                renderChart('chart-interactive-distribution', data.charts.interactive_distribution, dataSources),
+                renderChart('chart-interactive-grade', data.charts.interactive_grade, dataSources),
+                renderChart('chart-interactive-broker', data.charts.interactive_broker, dataSources),
+                renderChart('chart-buyers-main', data.charts.buyers_main, dataSources),
+                renderChart('chart-buyers-breakdown', data.charts.buyers_breakdown, dataSources),
+                renderChart('chart-candlestick', data.charts.candlestick, dataSources)
+            ];
+
+            // Wait for all embedding promises to resolve.
+            await Promise.all(chartPromises);
+
+            // Link the interactions now that all views are available and populated.
+            linkVisualizations();
+
+            // Trigger initial resize calculation.
+            setTimeout(() => {
+                handleResize();
+            }, 100);
+
+
+            // 4. Standard Tables, Outlook, Insights, Interactive Table (Remain the same)
+            renderSimpleTable('table-sell-through', data.tables.sell_through);
+            renderSimpleTable('table-realization', data.tables.realization);
+
+            const outlook = data.outlook;
+            if (outlook) {
+                document.getElementById('outlook-next-sale').textContent = outlook.next_sale || 'N/A';
+                document.getElementById('outlook-offerings').textContent = outlook.forthcoming_offerings_kgs || '--';
+                document.getElementById('outlook-weather').textContent = outlook.weather_outlook || '--';
+                document.getElementById('outlook-prediction').textContent = outlook.market_prediction || '--';
+            }
+
+            document.getElementById('analytical-insights').textContent = data.insights || 'No significant insights generated.';
+
+            renderInteractiveTable(data.tables.raw_sales_data);
+        }
+
+        
+        // PERFORMANCE FIX: Updated renderChart to accept dataSources
+        async function renderChart(elementId, chartSpec, dataSources) {
+            const container = document.getElementById(elementId);
+            if (!container) return null;
+
+            if (chartSpec && Object.keys(chartSpec).length > 0) {
+                try {
+                    container.innerHTML = ''; 
+
+                    // Render the chart structure first (without data)
+                    const result = await vegaEmbed(`#${elementId}`, chartSpec, {
+                        actions: false, 
+                        autosize: {type: 'fit', resize: true, contains: 'padding'}
+                    });
+
+                    // Store the view and inject data
+                    if (result.view) {
+                        vegaViews[elementId] = result.view;
+                        
+                        // Inject the data using the helper function
+                        injectDataSources(result.view, chartSpec, dataSources);
+
+                        // Run the dataflow and trigger a resize
+                        await result.view.runAsync();
+                        await result.view.resize().runAsync();
+                    }
+                    
+                    return result;
+
+                } catch (error) {
+                    console.error(`Error rendering chart ${elementId}:`, error);
+                    container.innerHTML = `<p class='no-data-message' style='color: red;'>Error rendering visualization. Check Console (F12). Details: ${error.message}</p>`;
+                    container.style.minHeight = 'auto';
+                    return null;
+                }
+            } else {
+                container.innerHTML = "<p class='no-data-message'>Awaiting data for this visualization.</p>";
+                container.style.minHeight = 'auto';
+                return null;
+            }
+        }
+
+        // PERFORMANCE FIX: New function to inject data into named sources
+        function injectDataSources(view, spec, dataSources) {
+            if (!dataSources) return;
+
+            // Helper to recursively find unique named data sources used in the spec
+            const findNamedData = (s) => {
+                let names = new Set();
+                if (!s) return names;
+
+                // Check the primary data definition (Altair uses this structure for named data)
+                if (s.data && s.data.name) {
+                    names.add(s.data.name);
+                }
+                
+                // Check composed charts (layer, hconcat, vconcat)
+                ['layer', 'hconcat', 'vconcat'].forEach(key => {
+                    if (s[key]) {
+                        s[key].forEach(l => findNamedData(l).forEach(n => names.add(n)));
+                    }
+                });
+
+                // Check transforms (like lookup)
+                if (s.transform) {
+                    s.transform.forEach(t => {
+                        if (t.from && t.from.data && t.from.data.name) {
+                            names.add(t.from.data.name);
+                        }
+                    });
+                }
+                return names;
+            };
+
+            const usedNames = findNamedData(spec);
+
+            // Inject data for each used name found in the spec
+            usedNames.forEach(name => {
+                if (dataSources[name]) {
+                    // Use Vega's changeset to efficiently inject the data
+                    const cs = vega.changeset().insert(dataSources[name]);
+                    try {
+                        // Apply the change to the view's dataflow
+                        view.change(name, cs);
+                    } catch (error) {
+                        console.error(`Error injecting data source "${name}":`, error);
+                    }
+                }
+            });
+            // Note: We do not call view.runAsync() here; it's called in renderChart after injection.
+        }
+
+
+        // (linkVisualizations function remains the same as the previous robust version)
+        function linkVisualizations() {
+            if (typeof vega === 'undefined') {
+                console.error("Vega library not loaded. Cannot link visualizations.");
+                return;
+            }
+
+            const syncViews = (view1, view2, dataSetName) => {
+                if (!view1 || !view2) return;
+
+                let updating1 = false;
+                let updating2 = false;
+
+                const createUpdater = (target, flagSetter, flagChecker) => (name, value) => {
+                    if (flagChecker()) return;
+                    flagSetter(true);
+                    const cs = vega.changeset().remove(() => true).insert(value);
+                    target.change(dataSetName, cs).runAsync()
+                        .then(() => flagSetter(false))
+                        .catch((error) => {
+                            flagSetter(false)
+                        }); 
+                };
+
+                view1.addDataListener(dataSetName, createUpdater(view2, (v) => updating2 = v, () => updating1));
+                view2.addDataListener(dataSetName, createUpdater(view1, (v) => updating1 = v, () => updating2));
+            };
+
+            // --- 1. Link Interactive Analysis (Price Distribution Brush) ---
+            const viewDist = vegaViews['chart-interactive-distribution'];
+            const viewGrade = vegaViews['chart-interactive-grade'];
+            const viewBroker = vegaViews['chart-interactive-broker'];
+            
+            const brushDataName = 'price_brush_store';
+            syncViews(viewDist, viewGrade, brushDataName);
+            syncViews(viewDist, viewBroker, brushDataName);
+
+            // --- 2. Link Buyer Activity (Buyer Selection and Metric Switch) ---
+            const buyerMainView = vegaViews['chart-buyers-main'];
+            const buyerBreakdownView = vegaViews['chart-buyers-breakdown'];
+
+            if (buyerMainView && buyerBreakdownView) {
+                
+                // 2a. Link Buyer Selection Data ('buyer_select_store')
+                syncViews(buyerMainView, buyerBreakdownView, 'buyer_select_store');
+
+                // 2b. Link Metric Switch Signal ('metric_switch_param')
+                const metricSignalName = 'metric_switch_param';
+                
+                buyerMainView.addSignalListener(metricSignalName, (name, value) => {
+                     try {
+                         if (buyerBreakdownView.signal(metricSignalName) !== value) {
+                            buyerBreakdownView.signal(metricSignalName, value).runAsync();
+                         }
+                     } catch (e) { /* Signal might not be ready */ }
+                });
+                buyerBreakdownView.addSignalListener(metricSignalName, (name, value) => {
+                    try {
+                        if (buyerMainView.signal(metricSignalName) !== value) {
+                            buyerMainView.signal(metricSignalName, value).runAsync();
+                        }
+                    } catch (e) { /* Signal might not be ready */ }
+                });
+            }
+        }
+
+
+        // (Remaining JavaScript functions renderSimpleTable, renderInteractiveTable, showError remain the same)
+        function renderSimpleTable(elementId, tableData) {
+             const container = document.getElementById(elementId);
+            if (!tableData || tableData.length === 0) {
+                container.innerHTML = "<p class='no-data-message' style='padding: 10px;'>No data.</p>";
+                return;
+            }
+            const table = document.createElement('table');
+            table.className = 'data-table'; 
+            const tbody = document.createElement('tbody');
+            tableData.forEach(item => {
+                const row = document.createElement('tr');
+                Object.values(item).forEach(value => {
+                    const td = document.createElement('td');
+                    td.textContent = value;
+                    row.appendChild(td);
+                });
+                tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+            container.innerHTML = '';
+            container.appendChild(table);
+        }
+
+        function renderInteractiveTable(tableData) {
+             if (!tableData || tableData.length === 0) {
+                document.getElementById('table-raw-data').innerHTML = "<p class='no-data-message'>No detailed sales data available for this period.</p>";
+                return;
+            }
+
+            const getUniqueValues = (data, field) => {
+                const values = new Set();
+                data.forEach(item => {
+                    if (item[field] != null) {
+                        values.add(item[field]);
+                    }
+                });
+                return Array.from(values).sort();
+            };
+
+
+            rawDataTable = new Tabulator("#table-raw-data", {
+                data: tableData,
+                layout: "fitColumns",
+                height: "600px", 
+                movableColumns: true,
+                groupStartOpen: false, 
+                groupToggleElement: "header",
+                initialSort: [
+                    {column: "Price (USD)", dir: "desc"},
+                ],
+                columns: [ 
+                    {title: "Mark", field: "Mark", widthGrow: 2, 
+                        headerFilter: "list", headerFilterParams:{values: getUniqueValues(tableData, "Mark"), clearable:true, autocomplete:true}
+                    },
+                    {title: "Grade", field: "Grade", widthGrow: 1,
+                        headerFilter: "list", headerFilterParams:{values: getUniqueValues(tableData, "Grade"), clearable:true, autocomplete:true}
+                    },
+                    {title: "Lot", field: "Lot", widthGrow: 1, headerFilter: "input"},
+                    {title: "KGs", field: "KGs", hozAlign: "right", formatter:"money", formatterParams:{thousand:",", precision:0},
+                        bottomCalc:"sum", bottomCalcFormatter:"money", bottomCalcFormatterParams:{thousand:",", precision:0}, widthGrow: 1
+                    },
+                    {title: "Price (USD)", field: "Price (USD)", hozAlign: "right", formatter:"money", formatterParams:{thousand:",", precision:2},
+                        bottomCalc:"avg", bottomCalcFormatter:"money", bottomCalcFormatterParams:{thousand:",", precision:2}, widthGrow: 1
+                    },
+                    {title: "Buyer", field: "Buyer", widthGrow: 2,
+                        headerFilter: "list", headerFilterParams:{values: getUniqueValues(tableData, "Buyer"), clearable:true, autocomplete:true}
+                    },
+                    {title: "Broker", field: "Broker", widthGrow: 1,
+                         headerFilter: "list", headerFilterParams:{values: getUniqueValues(tableData, "Broker"), clearable:true, autocomplete:true}
+                    },
+                ],
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('report-title').textContent = "Error Loading Report";
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.innerHTML = `<p>${message}</p>`;
+            errorDiv.style.display = 'block';
+            document.getElementById('report-content').style.display = 'none';
+        }
+    </script>
+    
+    <style>
+        /* Styling Updates: Mobile Responsiveness and Button Contrast */
+        
+        /* --- Typography and Colors --- */
+        :root {
+            --primary-color: #4285F4; /* (Active Blue) */
+            --primary-color-light: #a6c8ff; /* (Legacy Inactive Blue) */
+            --text-dark: #202124;
+            --text-medium: #3c4043;
+            --text-light: #5f6368;
+            --border-color: #dadce0;
+            --bg-light: #f8f9fa; /* (Light Gray Background) */
+            --bg-hover: #f1f3f4;
+        }
+
+        .report-viewer-body { font-size: 15px; }
+        .page-title { color: var(--text-dark); }
+        .report-meta-text { color: var(--text-light); font-size: 0.9em; }
+        .back-link { text-decoration: none; color: var(--primary-color); display: flex; align-items: center; font-weight: 500; }
+
+        /* --- Layout Structure: MOBILE FIRST --- */
+        
+       
+        /* ============================================================================= */
+        /* Default (Mobile): Single Column Layout for all primary grids */
+        /* ============================================================================= */
+
+        .interactive-analysis-bottom-row,
+        .buyer-activity-layout,
+        .analysis-grid,
+        .metrics-grid,
+        .outlook-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            /* Default gap (used by most grids) */
+            gap: 15px; 
+            width: 100%;
+            min-width: 0;
+        }
+        
+         .interactive-analysis-layout {
+             display: grid;
+             grid-template-rows: auto auto;
+             grid-template-columns: minmax(0, 1fr);
+             /* Reduced vertical spacing to 5px for maximum compactness */
+             gap: 5px; 
+             width: 100%;
+             min-width: 0;
+        }
+
+         #outlook-prediction-container {
+             grid-column: span 1 !important;
+         }
+
+        /* ============================================================================= */
+        /* Progressive Enhancement (Tablet/Desktop) */
+        /* ============================================================================= */
+
+         @media (min-width: 768px) {
+            .metrics-grid {
+                 grid-template-columns: repeat(3, minmax(0, 1fr));
+                 gap: 25px;
+            }
+
+            .outlook-grid {
+                grid-template-columns: 1fr 2fr;
+                 gap: 30px;
+            }
+             #outlook-prediction-container {
+                 grid-column: span 2 !important;
+             }
+             /* Restore a slightly larger gap on desktop (10px) */
+             .interactive-analysis-layout {
+                gap: 10px;
+             }
+        }
+
+         @media (min-width: 992px) {
+             .interactive-analysis-bottom-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 30px; 
+            }
+
+            .buyer-activity-layout {
+                grid-template-columns: repeat(2, minmax(0, 1fr)); 
+                gap: 30px;
+            }
+            .analysis-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 30px;
+            }
+         }
+
+        /* ============================================================================= */
+
+
+         .analysis-chart, .analysis-insights, .outlook-item, .metric-item {
+             min-width: 0;
+        }
+
+        .chart-container {
+            min-width: 0;
+            /* Keep min-height to prevent collapse during load */
+            min-height: 200px;
+            /* FIX (Mobile Interactivity): Ensure the container allows pointer events */
+            pointer-events: auto; 
+        }
+
+       
+        .metric-item h4 {
+             font-size: 1em;
+            color: var(--text-medium);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+         .metric-item p {
+             font-size: 0.9em;
+             color: var(--text-light);
+             margin-bottom: 15px;
+             line-height: 1.4;
+         }
+        
+
+
+        /* --- Cards and Components --- */
+        .report-card {
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .report-card {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: var(--text-medium);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .section-commentary {
+            font-size: 0.95em;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        
+        /* --- KPI Specific Styling --- */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .kpi-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        .kpi-card h3 {
+            font-size: 0.85em;
+            color: var(--text-light);
+            margin: 0 0 10px 0;
+            font-weight: 500;
+        }
+        .kpi-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .snapshot-card {
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .snapshot-card p {
+            font-size: 1em; 
+            font-weight: 400;
+            margin: 0; 
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        .card-title-inline {
+            font-size: 0.9em; color: var(--text-medium); margin-bottom: 10px; font-weight: 500;
+        }
+
+
+         /* --- Market Outlook Section Styling --- */
+       
+        .outlook-item h4 {
+             font-size: 0.9em;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .outlook-item p {
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+
+        /* --- Simple Table Styling (Metrics) --- */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 5px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+         .data-table tr td:last-child {
+            text-align: right;
+            font-weight: 500;
+         }
+         .data-table tr:last-child td {
+             border-bottom: none;
+         }
+        
+        /* --- Tabulator Interactive Table Styling --- */
+        .tabulator {
+            font-family: 'Roboto', sans-serif;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.95em;
+        }
+        .tabulator .tabulator-header {
+            background-color: var(--bg-light);
+            border-bottom: 1px solid var(--border-color);
+        }
+         .tabulator .tabulator-header .tabulator-col-title {
+            color: var(--text-medium);
+            font-weight: 500;
+         }
+        .tabulator .tabulator-row:hover {
+            background-color: var(--bg-hover);
+        }
+        .tabulator .tabulator-header .tabulator-header-filter input,
+        .tabulator .tabulator-header .tabulator-header-filter select {
+            border-radius: 4px;
+            padding: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tabulator-group {
+            background-color: #e9ecef;
+            font-weight: 700;
+            border-top: 1px solid var(--border-color);
+        }
+        .tabulator-calcs-holder {
+            background-color: var(--bg-light) !important;
+            font-weight: 700;
+            border-top: 2px solid var(--text-medium) !important;
+        }
+        
+        /* --- Utility Classes --- */
+        .no-data-message {
+            text-align: center; color: #999; padding: 20px; font-style: italic;
+        }
+        .error-container {
+            color: red; display: none; padding: 20px; border: 1px solid red; border-radius: 8px;
+        }
+        .simple-button {
+            padding: 8px 15px;
+            margin-left: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .simple-button:hover {
+            background-color: var(--bg-hover);
+        }
+        
+        .chart-description {
+            clear: both;
+            font-size: 0.85em; color: var(--text-light); 
+            margin-top: 10px;
+        }
+
+        /* ============================================================================= */
+        /* AGGRESSIVE STYLING FIXES: Vega-Embed Controls (Dropdowns and Radio Buttons)   */
+        /* ============================================================================= */
+        
+        /* Ensure the Vega-Embed container does not cause layout issues */
+        .vega-embed {
+             width: 100%; /* Ensure it respects the parent container width */
+             /* FIX (Mobile Alignment): Center the embed container if it's smaller than the parent */
+             margin: 0 auto; 
+             /* FIX (Mobile Interactivity): Ensure the embed container and its children allow pointer events */
+             pointer-events: auto;
+        }
+        
+        /* FIX (Mobile Interactivity): Explicitly enable pointer events on the rendered canvas/svg */
+        .vega-embed canvas, .vega-embed svg {
+            pointer-events: auto !important;
+        }
+
+        .vega-bindings {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; 
+            padding: 5px 0;
+        }
+
+        /* Specific positioning for the Buyer chart controls */
+        #chart-buyers-main .vega-bindings {
+            position: relative;
+            left: 0;
+            /* Increased margin-bottom slightly for better separation from the chart */
+            margin-bottom: 15px; 
+        }
+
+        .vega-bind-name {
+            font-weight: 500;
+            color: var(--text-medium);
+            margin-right: 15px;
+        }
+
+        /* Styling the Dropdown (<select>) */
+        .vega-bindings select {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9em;
+            box-shadow: none;
+            border-radius: 4px;
+
+            background: none;
+            background-color: transparent !important;
+            appearance: none; 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            
+            /* Add a simple custom arrow indicator */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%233c4043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+        }
+        .vega-bindings select:hover {
+            border-color: var(--primary-color);
+        }
+
+        /* Pill Button Styling for Radio Inputs */
+        
+        /* Hide the radio input */
+        .vega-bindings input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        /* FIX: Inactive State: Light gray background, dark text. Use high specificity and !important. */
+        #chart-buyers-main .vega-bindings input[type="radio"] + label {
+            padding: 8px 15px;
+            margin-right: 10px;
+            font-size: 0.9em;
+            color: var(--text-dark) !important; 
+            /* Using the light gray background variable */
+            background-color: var(--bg-light) !important; 
+            border: 1px solid var(--border-color) !important;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+            display: inline-block;
+        }
+
+        /* Hover effect for inactive state */
+         #chart-buyers-main .vega-bindings input[type="radio"]:not(:checked) + label:hover {
+             border-color: var(--text-medium) !important;
+             /* Slightly darker gray on hover */
+             background-color: #e9ecef !important; 
+         }
+
+        /* FIX: Active State: Strong blue background, white text. Use high specificity and !important. */
+        #chart-buyers-main .vega-bindings input[type="radio"]:checked + label {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: white !important;
+            font-weight: 600; /* Slightly bolder */
+        }
+
+    </style>
+</body>
+</html>

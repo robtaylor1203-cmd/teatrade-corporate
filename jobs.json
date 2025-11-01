@@ -1,0 +1,117 @@
+[
+  {
+    "title": "Trainee Tea Taster / Buyer",
+    "company": "Finchley Tea Merchants",
+    "location": "London, UK",
+    "type": "Full-time",
+    "snippet": "An exciting opportunity to train your palate and learn the art of tea buying. You will work alongside our Senior Buyer, tasting hundreds of teas...",
+    "link": "#",
+    "description": {
+      "intro": "An exciting opportunity to train your palate and learn the art of tea buying. You will work alongside our Senior Buyer, tasting hundreds of teas weekly to identify quality and flavour profiles for our blends.",
+      "responsibilities": [
+        "Participate in daily tea tasting sessions.",
+        "Log and categorise all tea samples received.",
+        "Assist in managing supplier relationships.",
+        "Monitor market trends and pricing."
+      ],
+      "qualifications": [
+        "A demonstrable passion for tea (any background).",
+        "A highly refined sense of taste and smell (or willingness to train).",
+        "Excellent data entry skills and attention to detail.",
+        "No prior experience required, full training provided."
+      ]
+    }
+  },
+  {
+    "title": "Tea Brand Manager",
+    "company": "The Manchester Tea Co.",
+    "location": "Manchester, UK",
+    "type": "Full-time",
+    "snippet": "We're looking for a creative Brand Manager to own the story and strategy for our new line of wellness teas. You will manage marketing campaigns...",
+    "link": "#",
+    "description": {
+      "intro": "We're looking for a creative Brand Manager to own the story and strategy for our new line of wellness teas. You will manage marketing campaigns, packaging design, and social media presence.",
+      "responsibilities": [
+        "Develop and execute the brand marketing strategy.",
+        "Manage social media channels and content creation.",
+        "Liaise with design agencies for packaging and promotional materials.",
+        "Analyse sales data to report on brand performance."
+      ],
+      "qualifications": [
+        "3+ years in a brand management or marketing role (FMCG preferred).",
+        "Proven experience in running digital marketing campaigns.",
+        "A creative mindset and a passion for storytelling.",
+        "Strong analytical skills."
+      ]
+    }
+  },
+  {
+    "title": "Quality Assurance Technician",
+    "company": "Kent Tea Packers",
+    "location": "Kent, UK",
+    "type": "Part-time",
+    "snippet": "Part-time role ensuring all our packed tea products meet stringent quality and safety standards. You will be responsible for line checks, sample testing...",
+    "link": "#",
+    "description": {
+      "intro": "A part-time role ensuring all our packed tea products meet stringent quality and safety standards. You will be responsible for line checks, sample testing, and maintaining factory floor documentation.",
+      "responsibilities": [
+        "Conduct regular quality checks on the packing line.",
+        "Collect and prepare samples for microbiological testing.",
+        "Ensure compliance with food safety (HACCP) standards.",
+        "Maintain accurate and detailed quality records."
+      ],
+      "qualifications": [
+        "Previous experience in a food production or QA/QC environment.",
+        "Understanding of food safety principles (HACCP/BRC).",
+        "Meticulous attention to detail.",
+        "Ability to work 3 days a week."
+      ]
+    }
+  },
+  {
+    "title": "Supply Chain Coordinator (Tea & Botanicals)",
+    "company": "Global Botanics Ltd",
+    "location": "Bristol, UK",
+    "type": "Full-time",
+    "snippet": "Manage the end-to-end supply chain for our imported teas and botanicals. This role involves logistics, import documentation, and inventory management...",
+    "link": "#",
+    "description": {
+      "intro": "Manage the end-to-end supply chain for our imported teas and botanicals. This role involves logistics, import documentation, and inventory management. You will be the key link between our overseas suppliers and our UK warehouse.",
+      "responsibilities": [
+        "Place purchase orders with suppliers.",
+        "Track international shipments and manage freight forwarders.",
+        "Handle all import documentation and customs clearance.",
+        "Monitor and manage stock levels to prevent shortages."
+      ],
+      "qualifications": [
+        "1-2 years experience in supply chain, logistics, or import/export.",
+        "Highly organised and proficient in Excel.",
+        "Excellent communication skills.",
+        "Experience with botanicals or foodstuffs is a plus, but not essential."
+      ]
+    }
+  },
+  {
+    "title": "Senior Barista & Tea Specialist",
+    "company": "The Brew House",
+    "location": "London, UK",
+    "type": "Full-time",
+    "snippet": "We're a high-end cafe looking for a senior barista who also has a deep knowledge of loose-leaf tea. You will lead shifts, train junior staff...",
+    "link": "#",
+    "description": {
+      "intro": "We're a high-end cafe looking for a senior barista who also has a deep knowledge of loose-leaf tea. You will lead shifts, train junior staff on coffee and tea preparation, and help curate our tea menu.",
+      "responsibilities": [
+        "Prepare and serve exceptional coffee and tea.",
+        "Lead shifts and manage front-of-house operations.",
+        "Train new staff on brewing techniques and customer service.",
+        "Assist with inventory management and ordering."
+      ],
+      "qualifications": [
+        "2+ years experience as a senior barista.",
+        "Specialist knowledge of loose-leaf tea (brewing methods, types).",
+        "Natural leader with experience training junior staff.",
+        "A passion for outstanding customer service."
+      ]
+    }
+  }
+]

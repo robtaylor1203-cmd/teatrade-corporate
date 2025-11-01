@@ -1,0 +1,615 @@
+{
+  "metadata": {
+    "sale_number": "2025-38",
+    "sale_date": "10 September 2025",
+    "location": "Mombasa",
+    "year": 2025,
+    "week_number": 37,
+    "sale_num_only": 38,
+    "generated_at": "2025-10-25T21:20:59.999802"
+  },
+  "kpis": {
+    "TOTAL_VOLUME": "0",
+    "AVG_PRICE": "$0.00",
+    "PRICE_CHANGE": "N/A",
+    "PRICE_CHANGE_CLASS": "neutral",
+    "PRICE_CHANGE_NUMERIC": 0,
+    "SELL_THROUGH_RATE": "0.00%",
+    "SELL_THROUGH_RATE_RAW": 0.0,
+    "REALIZATION_RATE": "N/A",
+    "SNAPSHOT": "Awaiting sales results. Offers published."
+  },
+  "insights": "Awaiting current week data or missing key columns for trend analysis.",
+  "charts": {
+    "interactive_distribution": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "data": {
+        "name": "source_sales_week"
+      },
+      "mark": {
+        "type": "bar",
+        "color": "#4285F4"
+      },
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "price_brush",
+            "value": 1.0
+          },
+          "value": 0.7
+        },
+        "tooltip": [
+          {
+            "bin": true,
+            "field": "price",
+            "type": "quantitative"
+          },
+          {
+            "aggregate": "count",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "bin": {
+            "maxbins": 50
+          },
+          "field": "price",
+          "title": "Price (USD/kg)",
+          "type": "quantitative"
+        },
+        "y": {
+          "aggregate": "count",
+          "title": "Number of Lots",
+          "type": "quantitative"
+        }
+      },
+      "height": 220,
+      "params": [
+        {
+          "name": "price_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ],
+            "fields": [
+              "price"
+            ]
+          }
+        }
+      ],
+      "title": "Price Distribution (Click and drag here to filter other charts)",
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "interactive_grade": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "layer": [
+        {
+          "data": {
+            "name": "source_sales_week"
+          },
+          "mark": {
+            "type": "bar",
+            "color": "#4285F4"
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "grade",
+                "type": "nominal"
+              },
+              {
+                "aggregate": "mean",
+                "field": "price",
+                "format": "$.2f",
+                "title": "Current Avg Price (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "sum",
+                "field": "total_weight_kgs",
+                "format": ",.0f",
+                "title": "Current Volume (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "max",
+                "field": "prev_avg_price",
+                "format": "$.2f",
+                "title": "Previous Avg Price (Overall)",
+                "type": "quantitative"
+              }
+            ],
+            "x": {
+              "field": "grade",
+              "sort": {
+                "field": "price",
+                "op": "mean",
+                "order": "descending"
+              },
+              "title": "Grade",
+              "type": "nominal"
+            },
+            "y": {
+              "aggregate": "mean",
+              "field": "price",
+              "title": "Average Price (USD/kg)",
+              "type": "quantitative"
+            }
+          },
+          "name": "view_13",
+          "transform": [
+            {
+              "lookup": "grade",
+              "default": null,
+              "from": {
+                "data": {
+                  "name": "source_prev_grade_metrics"
+                },
+                "key": "grade",
+                "fields": [
+                  "prev_avg_price"
+                ]
+              }
+            },
+            {
+              "filter": {
+                "param": "price_brush"
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "name": "source_prev_grade_metrics"
+          },
+          "mark": {
+            "type": "tick",
+            "color": "#000000",
+            "size": 15,
+            "thickness": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "grade",
+              "type": "nominal"
+            },
+            "y": {
+              "field": "prev_avg_price",
+              "type": "quantitative"
+            }
+          }
+        }
+      ],
+      "height": 320,
+      "params": [
+        {
+          "name": "price_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ],
+            "fields": [
+              "price"
+            ]
+          },
+          "views": [
+            "view_13"
+          ]
+        }
+      ],
+      "title": "Average Price by Grade (Black tick = Previous Week)",
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "interactive_broker": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "layer": [
+        {
+          "data": {
+            "name": "source_sales_week"
+          },
+          "mark": {
+            "type": "bar",
+            "color": "#4285F4"
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "broker",
+                "type": "nominal"
+              },
+              {
+                "aggregate": "sum",
+                "field": "value_usd",
+                "format": "$,.0f",
+                "title": "Current Total Value (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "mean",
+                "field": "price",
+                "format": "$.2f",
+                "title": "Current Avg Price (Filtered)",
+                "type": "quantitative"
+              },
+              {
+                "aggregate": "max",
+                "field": "prev_total_value",
+                "format": "$,.0f",
+                "title": "Previous Total Value (Overall)",
+                "type": "quantitative"
+              }
+            ],
+            "x": {
+              "field": "broker",
+              "sort": {
+                "field": "value_usd",
+                "op": "sum",
+                "order": "descending"
+              },
+              "title": "Broker",
+              "type": "nominal"
+            },
+            "y": {
+              "aggregate": "sum",
+              "field": "value_usd",
+              "title": "Total Value (USD)",
+              "type": "quantitative"
+            }
+          },
+          "name": "view_14",
+          "transform": [
+            {
+              "lookup": "broker",
+              "default": null,
+              "from": {
+                "data": {
+                  "name": "source_prev_broker_metrics"
+                },
+                "key": "broker",
+                "fields": [
+                  "prev_total_value"
+                ]
+              }
+            },
+            {
+              "filter": {
+                "param": "price_brush"
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "name": "source_prev_broker_metrics"
+          },
+          "mark": {
+            "type": "tick",
+            "color": "#000000",
+            "size": 15,
+            "thickness": 2
+          },
+          "encoding": {
+            "x": {
+              "field": "broker",
+              "type": "nominal"
+            },
+            "y": {
+              "field": "prev_total_value",
+              "type": "quantitative"
+            }
+          }
+        }
+      ],
+      "height": 320,
+      "params": [
+        {
+          "name": "price_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ],
+            "fields": [
+              "price"
+            ]
+          },
+          "views": [
+            "view_14"
+          ]
+        }
+      ],
+      "title": "Total Value by Broker (Black tick = Previous Week)",
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "buyers_main": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "data": {
+        "name": "source_sales_week"
+      },
+      "mark": {
+        "type": "bar"
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "param": "buyer_select",
+            "value": "#4285F4"
+          },
+          "value": "#a6c8ff"
+        },
+        "tooltip": [
+          {
+            "field": "buyer",
+            "type": "nominal"
+          },
+          {
+            "field": "total_value",
+            "format": "$,.0f",
+            "title": "Value (USD)",
+            "type": "quantitative"
+          },
+          {
+            "field": "total_volume",
+            "format": ",.0f",
+            "title": "Volume (kg)",
+            "type": "quantitative"
+          },
+          {
+            "field": "avg_price",
+            "format": "$.2f",
+            "title": "Avg Price",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "dynamic_metric_sum",
+          "title": null,
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "buyer",
+          "sort": {
+            "field": "dynamic_metric_sum",
+            "order": "descending"
+          },
+          "title": "Buyer",
+          "type": "nominal"
+        }
+      },
+      "height": 400,
+      "params": [
+        {
+          "name": "buyer_select",
+          "select": {
+            "type": "point",
+            "fields": [
+              "buyer"
+            ],
+            "clear": false
+          }
+        },
+        {
+          "name": "metric_switch_param",
+          "bind": {
+            "input": "radio",
+            "options": [
+              "Value (USD)",
+              "Volume (kg)"
+            ],
+            "name": "Select Metric: "
+          },
+          "value": "Value (USD)"
+        }
+      ],
+      "title": "Top 15 Buyers (Click bar to see breakdown)",
+      "transform": [
+        {
+          "filter": "(datum.buyer !== 'N/A (Pending)')"
+        },
+        {
+          "calculate": "if((metric_switch_param === 'Value (USD)'),datum.value_usd,datum.total_weight_kgs)",
+          "as": "dynamic_metric"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "value_usd",
+              "as": "total_value"
+            },
+            {
+              "op": "sum",
+              "field": "total_weight_kgs",
+              "as": "total_volume"
+            },
+            {
+              "op": "sum",
+              "field": "dynamic_metric",
+              "as": "dynamic_metric_sum"
+            }
+          ],
+          "groupby": [
+            "buyer"
+          ]
+        },
+        {
+          "window": [
+            {
+              "op": "rank",
+              "field": "",
+              "as": "rank"
+            }
+          ],
+          "sort": [
+            {
+              "field": "dynamic_metric_sum",
+              "order": "descending"
+            }
+          ]
+        },
+        {
+          "filter": "(datum.rank <= 15)"
+        },
+        {
+          "calculate": "(datum.total_value / datum.total_volume)",
+          "as": "avg_price"
+        }
+      ],
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "buyers_breakdown": {
+      "config": {
+        "view": {
+          "continuousWidth": 300,
+          "continuousHeight": 300
+        }
+      },
+      "data": {
+        "name": "source_sales_week"
+      },
+      "mark": {
+        "type": "bar",
+        "color": "#4285F4"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "buyer",
+            "type": "nominal"
+          },
+          {
+            "field": "grade",
+            "type": "nominal"
+          },
+          {
+            "aggregate": "sum",
+            "field": "value_usd",
+            "format": "$,.0f",
+            "title": "Value (USD)",
+            "type": "quantitative"
+          },
+          {
+            "aggregate": "sum",
+            "field": "total_weight_kgs",
+            "format": ",.0f",
+            "title": "Volume (kg)",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "aggregate": "sum",
+          "field": "dynamic_metric",
+          "title": null,
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "grade",
+          "sort": "-x",
+          "title": "Grade",
+          "type": "nominal"
+        }
+      },
+      "height": 400,
+      "params": [
+        {
+          "name": "buyer_select",
+          "select": {
+            "type": "point",
+            "fields": [
+              "buyer"
+            ],
+            "clear": false
+          }
+        },
+        {
+          "name": "metric_switch_param",
+          "bind": {
+            "input": "radio",
+            "options": [
+              "Value (USD)",
+              "Volume (kg)"
+            ],
+            "name": "Select Metric: "
+          },
+          "value": "Value (USD)"
+        }
+      ],
+      "title": "Grade Breakdown",
+      "transform": [
+        {
+          "calculate": "if((metric_switch_param === 'Value (USD)'),datum.value_usd,datum.total_weight_kgs)",
+          "as": "dynamic_metric"
+        },
+        {
+          "filter": {
+            "param": "buyer_select"
+          }
+        }
+      ],
+      "width": "container",
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json"
+    },
+    "candlestick": {}
+  },
+  "tables": {
+    "sell_through": [
+      {
+        "Metric": "Lots Offered",
+        "Value": "2,951"
+      },
+      {
+        "Metric": "Lots Sold",
+        "Value": "0"
+      },
+      {
+        "Metric": "Rate",
+        "Value": "0.00%"
+      }
+    ],
+    "realization": [
+      {
+        "Metric": "Status",
+        "Value": "Insufficient Data"
+      }
+    ],
+    "raw_sales_data": []
+  },
+  "outlook": {
+    "next_sale": "2025-39",
+    "forthcoming_offerings_kgs": "7,157,433",
+    "weather_outlook": "Seasonal weather patterns are prevailing in the key growing regions supplying Mombasa. Production levels are reported as stable.",
+    "market_prediction": "Based on current demand trends, the market is expected to remain active. Buyers are advised to monitor global economic indicators and currency fluctuations which may impact pricing in the coming weeks."
+  },
+  "data_sources": {
+    "source_sales_week": [],
+    "source_prev_grade_metrics": [],
+    "source_prev_broker_metrics": [],
+    "source_movement_data": []
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "sale_number": "2025-41",
+    "sale_num_only": 41,
+    "sale_date": "29 September 2025",
+    "year": 2025,
+    "week_number": 40,
+    "filename": "mombasa_s2025-41_20250929.json",
+    "location": "Mombasa",
+    "snapshot": "Awaiting sales results. Offers published."
+  },
+  {
+    "sale_number": "39",
+    "sale_num_only": 39,
+    "sale_date": "29 September 2025",
+    "year": 2025,
+    "week_number": 40,
+    "filename": "mombasa_s39_20250929.json",
+    "location": "Mombasa",
+    "snapshot": "Prices firm to dearer (+0.86%). Fair demand; selective buying."
+  },
+  {
+    "sale_number": "2025-40",
+    "sale_num_only": 40,
+    "sale_date": "23 September 2025",
+    "year": 2025,
+    "week_number": 39,
+    "filename": "mombasa_s2025-40_20250923.json",
+    "location": "Mombasa",
+    "snapshot": "Awaiting sales results. Offers published."
+  },
+  {
+    "sale_number": "37",
+    "sale_num_only": 37,
+    "sale_date": "16 September 2025",
+    "year": 2025,
+    "week_number": 38,
+    "filename": "mombasa_s37_20250916.json",
+    "location": "Mombasa",
+    "snapshot": "Prices significantly higher (+4.15%). Fair demand; selective buying."
+  },
+  {
+    "sale_number": "2025-39",
+    "sale_num_only": 39,
+    "sale_date": "15 September 2025",
+    "year": 2025,
+    "week_number": 38,
+    "filename": "mombasa_s2025-39_20250915.json",
+    "location": "Mombasa",
+    "snapshot": "Awaiting sales results. Offers published."
+  },
+  {
+    "sale_number": "2025-38",
+    "sale_num_only": 38,
+    "sale_date": "10 September 2025",
+    "year": 2025,
+    "week_number": 37,
+    "filename": "mombasa_s2025-38_20250910.json",
+    "location": "Mombasa",
+    "snapshot": "Awaiting sales results. Offers published."
+  },
+  {
+    "sale_number": "2025-37",
+    "sale_num_only": 37,
+    "sale_date": "02 September 2025",
+    "year": 2025,
+    "week_number": 36,
+    "filename": "mombasa_s2025-37_20250902.json",
+    "location": "Mombasa",
+    "snapshot": "Awaiting sales results. Offers published."
+  },
+  {
+    "sale_number": "35",
+    "sale_num_only": 35,
+    "sale_date": "01 September 2025",
+    "year": 2025,
+    "week_number": 36,
+    "filename": "mombasa_s35_20250901.json",
+    "location": "Mombasa",
+    "snapshot": "Prices generally steady (N/A (First Sale)). Fair demand; selective buying."
+  },
+  {
+    "sale_number": "38",
+    "sale_num_only": 38,
+    "sale_date": "24 September 2024",
+    "year": 2024,
+    "week_number": 39,
+    "filename": "mombasa_s38_20240924.json",
+    "location": "Mombasa",
+    "snapshot": "Prices firm to dearer (+1.09%). Good general demand."
+  }
+]
